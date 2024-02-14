@@ -2,13 +2,29 @@ import Checkbox from 'expo-checkbox';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 const register = () => {
 
     const [showActive, setShowActiveColor] = useState(false)
     const [showInActive, setShowInActiveColor] = useState(true)
 
     const [isChecked, setChecked] = useState(false);
+
+    const [password, setPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
+
+    const [password1, setPassword1] = useState(false);
+    const [showPassword1, setShowPassword1] = useState('');
+
+
+    const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+    };
+
+    const togglePasswordVisibility1 = () => {
+        setShowPassword1(!showPassword1);
+    };
 
     const showFunc = () =>{
         setShowActiveColor(true)
@@ -82,12 +98,43 @@ const register = () => {
 
                     <View style={styles.inputDiv}>
                         <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text>
-                        <TextInput placeholder='Password: ' style={styles.inputStyles}/>
+                        <View>
+                            <TextInput placeholder='Password:' 
+                                style={styles.inputStyles}
+                                secureTextEntry={!showPassword}
+                                value={ password}
+                            />
+
+                            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>
+                                {showPassword ? 
+                                    <Ionicons name='eye-off' size={20}/>
+                                    :
+                                    <Ionicons name='eye' size={20} /> 
+                                }
+                            </TouchableOpacity>
+                            
+                        </View>
                     </View>
+
 
                     <View style={styles.inputDiv}>
                         <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text>
-                        <TextInput placeholder='Confirm Password : ' style={styles.inputStyles}/>
+                        <View>
+                            <TextInput placeholder='Confirm Password:' 
+                                style={styles.inputStyles}
+                                secureTextEntry={!showPassword1}
+                                value={ password1}
+                            />
+
+                            <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
+                                {showPassword1 ? 
+                                    <Ionicons name='eye-off' size={20}/>
+                                    :
+                                    <Ionicons name='eye' size={20} /> 
+                                }
+                            </TouchableOpacity>
+                            
+                        </View>
                     </View>
                     </View>
             }
@@ -156,6 +203,7 @@ const styles = StyleSheet.create({
 
     inputDiv : {
         paddingTop : 15,
+        
     },
 
     inputStyles : {
@@ -163,7 +211,8 @@ const styles = StyleSheet.create({
         borderColor : Colors.myGray,
         borderWidth : 1,
         borderRadius : 5,
-        fontSize : 15
+        fontSize : 15,
+        position : 'relative'
     },
 
     btnStyles :{
@@ -175,5 +224,11 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         borderRadius : 10,  
         marginTop : 15,
-      }
+    },
+
+    iconStyle : {
+        position : 'absolute',
+        top : 15,
+        right : 30,
+    }
 })
