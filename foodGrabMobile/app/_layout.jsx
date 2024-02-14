@@ -14,7 +14,7 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'Onboard/register',
+  initialRouteName: 'Onboard/login',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -51,11 +51,12 @@ function RootLayoutNav() {
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <Stack>
-      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
     // </ThemeProvider>

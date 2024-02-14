@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput, Scro
 import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import {Link} from 'expo-router'
 const register = () => {
 
     const [showActive, setShowActiveColor] = useState(false)
@@ -74,13 +75,43 @@ const register = () => {
 
                         <View style={styles.inputDiv}>
                             <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text>
-                            <TextInput placeholder='Password : ' style={styles.inputStyles}/>
+                            <View>
+                                <TextInput placeholder='Password:' 
+                                    style={styles.inputStyles}
+                                    secureTextEntry={!showPassword}
+                                    value={ password}
+                                />
+
+                                <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>
+                                    {showPassword ? 
+                                        <Ionicons name='eye-off' size={20}/>
+                                        :
+                                        <Ionicons name='eye' size={20} /> 
+                                    }
+                                </TouchableOpacity>
+                                
+                            </View>
                         </View>
 
-                        <View style={styles.inputDiv}>
-                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text>
-                            <TextInput placeholder='Confirm Password : ' style={styles.inputStyles}/>
+                    <View style={styles.inputDiv}>
+                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text>
+                        <View>
+                            <TextInput placeholder='Confirm Password:' 
+                                style={styles.inputStyles}
+                                secureTextEntry={!showPassword1}
+                                value={ password1}
+                            />
+
+                            <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
+                                {showPassword1 ? 
+                                    <Ionicons name='eye-off' size={20}/>
+                                    :
+                                    <Ionicons name='eye' size={20} /> 
+                                }
+                            </TouchableOpacity>
+                            
                         </View>
+                    </View>
                     </View> 
                 
                 : 
@@ -154,7 +185,10 @@ const register = () => {
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>Get Started</Text>
             </TouchableOpacity>
 
-            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 15, fontFamily : 'Railway3',}}>Have an account? <Text style={{color : Colors.myRed}}>Login</Text></Text>
+            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 15, fontFamily : 'Railway3',}}>
+                Have an account? 
+                <Link href={'Onboard/login'}><Text style={{color : Colors.myRed}}>Login</Text></Link>
+            </Text>
         </ScrollView>
 
       </View>
@@ -172,7 +206,7 @@ const styles = StyleSheet.create({
         borderTopEndRadius : 20,
         borderTopLeftRadius : 20,
         paddingTop : 20,
-        paddingHorizontal : 30,
+        paddingHorizontal : 20,
     },
 
     active : {

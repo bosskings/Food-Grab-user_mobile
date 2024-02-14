@@ -12,15 +12,15 @@ const welcomeFour = () => {
 
         {/* ========= Text =============== */}
         
-        <Link href={'welcomes/welcomeTwo'} asChild>        
+        <Link href={'Onboard/register'} asChild>        
           <TouchableOpacity style={styles.btnStyles1}>
               <Text style={{fontSize : 18, color : 'white', fontFamily : 'Railway2'}}>Get Started</Text>
             </TouchableOpacity>
         </Link>
 
-        <Link href={'welcomes/welcomeTwo'} asChild>        
+        <Link href={'Onboard/login'} asChild>        
           <TouchableOpacity style={styles.btnStyles}>
-              <Text style={{fontSize : 18, color : Colors.myGreen, fontFamily : 'Railway2'}}>Next</Text>
+              <Text style={{fontSize : 18, color : Colors.myGreen, fontFamily : 'Railway2'}}>Login</Text>
             </TouchableOpacity>
         </Link>
       </View>
