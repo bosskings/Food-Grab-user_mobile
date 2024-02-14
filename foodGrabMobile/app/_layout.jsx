@@ -5,13 +5,16 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
+import { useColorScheme } from '@/components/useColorScheme';
+import { StatusBar } from 'expo-status-bar';
+import { View } from '@/components/Themed';
 export {
   
   ErrorBoundary,
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'welcomes/wecomeOne',
+  initialRouteName: 'Onboard/register',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -43,11 +46,18 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const colorScheme = useColorScheme();
 
   return (
-      <Stack>
-        <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+    // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <Stack>
+      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
+    // </ThemeProvider>
   );
 }

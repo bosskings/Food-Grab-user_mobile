@@ -15,7 +15,7 @@ export default function TabLayout() {
         options={{
           title: 'Tab One',
           headerRight: () => (
-            <Text>a</Text>
+            <Text>f</Text>
           ),
         }}
       />
