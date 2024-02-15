@@ -1,10 +1,20 @@
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
+import {Link} from 'expo-router'
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const OTPVerifcation = () => {
-  return (
+  const [isEmpty, setIsEmpty] = useState(null)
 
+  const handleChange = (e) =>{
+    // e.target.value 
+    setIsEmpty(!isEmpty)
+  }
+
+
+
+  return (
     <SafeAreaView style={styles.container}>
         <View>
           <Text style={{fontFamily : 'Railway2', fontSize : 25}}>OTP Verification</Text>
@@ -14,17 +24,38 @@ const OTPVerifcation = () => {
           </Text>
 
           <View style={styles.OTPDiv}>
-            <TextInput style={styles.inputDiv}/>
-            <TextInput style={styles.inputDiv}/>
-            <TextInput style={styles.inputDiv}/>
-            <TextInput style={styles.inputDiv}/>
+              <TextInput style={isEmpty === null ? styles.inputDiv : styles.inputDiv2}
+                value={isEmpty}
+                onChange={handleChange}
+              />
+
+              <TextInput style={isEmpty === null ? styles.inputDiv : styles.inputDiv2}
+                value={isEmpty}
+                onChange={handleChange}
+              />
+
+              <TextInput style={isEmpty === null ? styles.inputDiv : styles.inputDiv2}
+                value={isEmpty}
+                onChange={handleChange}
+              />
+
+              <TextInput style={isEmpty === null ? styles.inputDiv : styles.inputDiv2}
+                value={isEmpty}
+                onChange={handleChange}
+              />
           </View>
           
-          <TouchableOpacity style={styles.btnStyle}>
-            <Text style={{    fontFamily : 'Railway2', fontSize : 15, color : 'white'}}>Verify my account</Text>
+
+          <Text style={{textAlign : 'center', fontSize : 20, fontFamily : 'Railway3', paddingTop : 20}}>00:30</Text>
+
+          <TouchableOpacity style={styles.btnContainer} onPress={() => {/* handle verification */}}>
+            <Text style={styles.btnText}>Verify my account</Text>
           </TouchableOpacity>
 
-          <Text>Didn’t receive a code? <Text>Resend code</Text></Text>
+
+          <Text style={{fontFamily : 'Railway1', paddingTop : 30, textAlign : 'center', fontSize : 15}}>Didn’t receive a code? 
+          <Text style={{color : Colors.myRed, fontFamily : 'Railway3'}}>Resend code</Text></Text>
+          <Link href={''}><Ionicons name='arrow-forward' size={20} style={{textAlign : 'center', paddingTop : 10}}/></Link>
         </View>
     </SafeAreaView>
   )
@@ -60,14 +91,34 @@ const styles = StyleSheet.create({
     fontSize : 25
   },
 
-  btnStyle : {
+  inputDiv2 : {
+    borderColor : Colors.myRed,
+    borderWidth : 1,
+    width : '19%',
     height : 60,
-    backgroundColor : Colors.myRed,
-    flexDirection : 'row',
-    alignItems : 'center',
-    paddingHorizontal : 20,
-    justifyContent : 'center',
-    borderRadius : 10,  
-    marginTop : 40,
-  }
+    borderRadius : 10,
+    padding : 10,
+    textAlign : 'center',
+    fontFamily : 'Railway2',  
+    fontSize : 25,
+    color : Colors.myRed
+  },
+
+  btnContainer: {
+    height: 60,
+    backgroundColor: Colors.myRed,
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    borderRadius: 10,
+    marginTop: 40,
+    width: '100%',
+  },
+  
+  btnText: {
+    fontFamily: 'Railway2',
+    fontSize: 15,
+    color: 'white',
+    textAlign: 'center',
+  },
 })
