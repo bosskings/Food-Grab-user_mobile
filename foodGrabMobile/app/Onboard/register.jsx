@@ -25,7 +25,7 @@ const register = () => {
 
     const togglePasswordVisibility1 = () => {
         setShowPassword1(!showPassword1);
-    };
+    };  
 
     const showFunc = () =>{
         setShowActiveColor(true)

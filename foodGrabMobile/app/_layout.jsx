@@ -1,20 +1,23 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useNavigation } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-
+import { Text } from '@/components/Themed';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useColorScheme } from '@/components/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
 import { View } from '@/components/Themed';
+
+
 export {
   
   ErrorBoundary,
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'Onboard/login',
+  initialRouteName: 'Onboard/OTPVerifcation',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -48,15 +51,28 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  const navigate = useNavigation() 
+
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <Stack>
-      <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/OTPVerifcation" options={{
+        // headerShown : false,
+        headerTitle : '',
+        headerLeft : ()=>(
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+        ),
+
+        headerShadowVisible : false,
+
+
+      }} />
       <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
       <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
     // </ThemeProvider>
