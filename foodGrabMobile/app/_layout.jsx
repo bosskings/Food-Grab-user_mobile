@@ -17,7 +17,7 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'Onboard/OTPVerifcation',
+  initialRouteName: '(tabs)',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -56,24 +56,41 @@ function RootLayoutNav() {
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <Stack>
+
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+      {/* ================ WELCOME SCREEN ============================= */}
+
+      <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
+
+
+      {/* ===================== ONBOARD ================================ */}
+      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
+
       <Stack.Screen name="Onboard/OTPVerifcation" options={{
-        // headerShown : false,
         headerTitle : '',
         headerLeft : ()=>(
           <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
         ),
 
         headerShadowVisible : false,
-
-
       }} />
-      <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
-      <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
-      <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
-      <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
-      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/successfull" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/address" options={{ 
+        headerTitle : '',
+        headerLeft : ()=>(
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+        ),
+
+        headerShadowVisible : false,
+      }} />
+
+      {/* ======================= LOGIN ===================================== */}
       <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
     </Stack>
     // </ThemeProvider>
   );
