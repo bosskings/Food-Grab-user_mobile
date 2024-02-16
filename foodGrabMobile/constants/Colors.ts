@@ -19,7 +19,7 @@ export default {
 
   myRed:  '#EC1C23',
   myGreen : '#101010',
-  myGray : '#D0D5DD'
-
+  myGray : '#D0D5DD',
+  myLightGreen : '#70AA67',
 
 };

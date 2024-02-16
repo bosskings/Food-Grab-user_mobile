@@ -58,6 +58,7 @@ function RootLayoutNav() {
     <Stack>
 
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} />
 
       {/* ================ WELCOME SCREEN ============================= */}
 
