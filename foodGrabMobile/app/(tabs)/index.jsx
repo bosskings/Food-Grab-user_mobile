@@ -10,21 +10,19 @@ const index = () => {
     <SafeAreaView style={styles.container}>
         <DashHeader />
 
-        <View style={{position : 'relative'}}>
+        <View style={{position : 'relative', paddingTop : 30}}>
           <Ionicons name='search' size={15} style={{position : 'absolute', top : 20, left : 20}}/>
           <TextInput placeholder='Search for your favourite food' style={styles.inputStyles}/>
           <Ionicons name='filter' size={15} style={{position : 'absolute', top : 20, right : 20}}/>
         </View>
 
         <View>
-            <View style={{paddingVertical : 10, paddingBottom : 0}}>
+            <View style={{paddingVertical : 10, paddingBottom : 0, }}>
               <Image source={require('../../assets/images/dashSec1.png')}
                 style={styles.imageDIv}
+                resizeMode='contain'
               />
             </View>
-
-
-
         </View>
     </SafeAreaView>
 
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
 
     imageDIv : {
       width : '100%',
-      height : 120
+      height : '0',
     },
 
     inputStyles : {
