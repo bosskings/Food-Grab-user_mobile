@@ -17,7 +17,7 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
+  initialRouteName: 'resturantDetails/resturantPage',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -57,6 +57,14 @@ function RootLayoutNav() {
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <Stack>
 
+      <Stack.Screen name="resturantDetails/resturantPage" options={{
+        headerTitle : '',
+        headerLeft : ()=>(
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+        ),
+
+        headerShadowVisible : false,
+      }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} />
 

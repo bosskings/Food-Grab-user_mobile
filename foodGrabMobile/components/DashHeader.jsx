@@ -1,8 +1,9 @@
 import React from 'react'
-import { SafeAreaView,View, Text, TouchableOpacity } from 'react-native'
+import {View, Text, TouchableOpacity } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router'
 import Colors from '@/constants/Colors';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const DashHeader = () => {
   return (

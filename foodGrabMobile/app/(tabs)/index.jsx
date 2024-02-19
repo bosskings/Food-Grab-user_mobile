@@ -1,10 +1,11 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import DashHeader from '../../components/DashHeader';
 import { Link } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const index = () => {
 
@@ -196,6 +197,7 @@ const index = () => {
             <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 10}}>Available Restaurants</Text>
             <View>
 
+              <Link href={'resturantDetails/resturantPage'} asChild>
               <TouchableOpacity style={styles.restImageDiv}>
                 <Image source={require('../../assets/images/rest1.png')}
                   resizeMode='cover'
@@ -216,6 +218,7 @@ const index = () => {
                   </View>
                 </View>
               </TouchableOpacity>
+              </Link>
 
               <TouchableOpacity style={styles.restImageDiv}>
                 <Image source={require('../../assets/images/rest2.png')}
@@ -259,9 +262,6 @@ const index = () => {
                   </View>
                 </View>
               </TouchableOpacity>
-
-
-
             </View>
           </ScrollView>
         }
@@ -277,7 +277,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor : 'white',
-        paddingTop :50,
         paddingHorizontal: 20
     },
 

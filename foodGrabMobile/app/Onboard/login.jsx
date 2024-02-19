@@ -1,9 +1,10 @@
 import Checkbox from 'expo-checkbox';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import { StyleSheet, Text, View,  TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context'
 const register = () => {
 
     const [showActive, setShowActiveColor] = useState(false)
