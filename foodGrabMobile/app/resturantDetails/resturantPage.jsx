@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'rea
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Colors from '@/constants/Colors';
+import { Link } from 'expo-router'
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -59,7 +60,7 @@ const resturantPage = () => {
 
             </View>
 
-            <ScrollView>
+            <ScrollView style={{paddingVertical : 10, height : '60%'}}>
                 <TouchableOpacity>
                 <View style={{display : 'flex', 
                     flexDirection : 'row', gap : 10, 
@@ -104,8 +105,8 @@ const resturantPage = () => {
                     marginBottom : 15,
                 }}>
 
-                    <Image source={require('../../assets/images/imgFood4.png')}
-                    style={{width : 80, height : 70, borderRadius : 5}}
+                    <Image source={require('../../assets/images/imgFood3.png')}
+                    style={{width : 70, height : 70, borderRadius : 5}}
                     />
 
                     <View style={{width : '75%'}}>
@@ -137,8 +138,8 @@ const resturantPage = () => {
                     marginBottom : 15,
                 }}>
 
-                    <Image source={require('../../assets/images/imgFood4.png')}
-                    style={{width : 80, height : 70, borderRadius : 5}}
+                    <Image source={require('../../assets/images/imgFood2.png')}
+                    style={{width : 70, height : 70, borderRadius : 5}}
                     />
 
                     <View style={{width : '75%'}}>
@@ -171,8 +172,8 @@ const resturantPage = () => {
                     marginBottom : 15,
                 }}>
 
-                    <Image source={require('../../assets/images/imgFood4.png')}
-                    style={{width : 80, height : 70, borderRadius : 5}}
+                    <Image source={require('../../assets/images/imgFood1.png')}
+                    style={{width : 70, height : 70, borderRadius : 5}}
                     />
 
                     <View style={{width : '75%'}}>
@@ -224,7 +225,8 @@ const resturantPage = () => {
                     </View>
 
                 </View>
-                </TouchableOpacity>                
+                </TouchableOpacity>   
+                           
             </ScrollView>
         </View>
     </View>
