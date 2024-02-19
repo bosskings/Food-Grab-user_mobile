@@ -61,12 +61,12 @@ function RootLayoutNav() {
         headerTitle : '',
         headerLeft : ()=>(
           <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-        ),
-
-        headerShadowVisible : false,
-      }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          ),
+          
+          headerShadowVisible : false,
+        }} />
       <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
       {/* ================ WELCOME SCREEN ============================= */}
 

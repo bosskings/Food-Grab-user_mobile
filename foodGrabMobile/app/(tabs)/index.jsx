@@ -198,26 +198,26 @@ const index = () => {
             <View>
 
               <Link href={'resturantDetails/resturantPage'} asChild>
-              <TouchableOpacity style={styles.restImageDiv}>
-                <Image source={require('../../assets/images/rest1.png')}
-                  resizeMode='cover'
-                  style={styles.restImage}
-                />
+                <TouchableOpacity style={styles.restImageDiv}>
+                  <Image source={require('../../assets/images/rest1.png')}
+                    resizeMode='cover'
+                    style={styles.restImage}
+                  />
 
-                <View style={{paddingHorizontal : 10, paddingVertical : 10}}>
-                  <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', }}>
-                    <Text style={{fontFamily : 'Railway3'}}>Kilimajaro - Big Tree</Text>
-                    <Text style={{marginLeft : 'auto', fontFamily : 'Railway2'}}>5.0 (123)</Text>
-                  </View>
+                  <View style={{paddingHorizontal : 10, paddingVertical : 10}}>
+                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', }}>
+                      <Text style={{fontFamily : 'Railway3'}}>Kilimajaro - Big Tree</Text>
+                      <Text style={{marginLeft : 'auto', fontFamily : 'Railway2'}}>5.0 (123)</Text>
+                    </View>
 
-                  <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', paddingTop : 10}}>
-                      <Text style={{fontFamily : 'Railway1'}}>From N1000 | 5 - 10 mins</Text>
-                      <TouchableOpacity style={{marginLeft : 'auto',}}>
-                        <FontAwesome name='heart-o' color={Colors.btnGreen}  size={15}/>
-                      </TouchableOpacity>
+                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', paddingTop : 10}}>
+                        <Text style={{fontFamily : 'Railway1'}}>From N1000 | 5 - 10 mins</Text>
+                        <TouchableOpacity style={{marginLeft : 'auto',}}>
+                          <FontAwesome name='heart-o' color={Colors.btnGreen}  size={15}/>
+                        </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
               </Link>
 
               <TouchableOpacity style={styles.restImageDiv}>

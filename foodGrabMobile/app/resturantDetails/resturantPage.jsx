@@ -61,38 +61,40 @@ const resturantPage = () => {
             </View>
 
             <ScrollView style={{paddingVertical : 10, height : '60%'}}>
-                <TouchableOpacity>
-                <View style={{display : 'flex', 
-                    flexDirection : 'row', gap : 10, 
-                    justifyContent : 'center', 
-                    alignItems : 'center', 
-                    borderBottomColor : Colors.myGray,
-                    borderBottomWidth : 1,
-                    paddingBottom : 15,
-                    marginBottom : 15,
-                }}>
-
-                    <Image source={require('../../assets/images/imgFood4.png')}
-                    style={{width : 70, height : 70, borderRadius : 5}}
-                    />
-
-                    <View style={{width : '75%'}}>
-                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center'}}>
-                        <Text style={{fontFamily : 'Railway2', fontSize : 15}}>Belle Combo</Text>
-                    </View>
-
-                    <Text style={{fontFamily : 'Railway1', 
-                        fontSize : 12, color : 'gray', paddingVertical : 5,
-                        textAlign : 'justify'
+                <Link href={'/'} asChild> 
+                    <TouchableOpacity>
+                    <View style={{display : 'flex', 
+                        flexDirection : 'row', gap : 10, 
+                        justifyContent : 'center', 
+                        alignItems : 'center', 
+                        borderBottomColor : Colors.myGray,
+                        borderBottomWidth : 1,
+                        paddingBottom : 15,
+                        marginBottom : 15,
                     }}>
-                        Lorem ipsum dolor sit amet consectetur adipis icing elit. 
-                        Maxime mollitia,molestiae quas vel sint.
-                    </Text>
-                    <Text style={{fontFamily : 'Railway1', color : Colors.btnGreen}}>From N3,000</Text>
-                    </View>
 
-                </View>
-                </TouchableOpacity>
+                        <Image source={require('../../assets/images/imgFood4.png')}
+                        style={{width : 70, height : 70, borderRadius : 5}}
+                        />
+
+                        <View style={{width : '75%'}}>
+                        <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center'}}>
+                            <Text style={{fontFamily : 'Railway2', fontSize : 15}}>Belle Combo</Text>
+                        </View>
+
+                        <Text style={{fontFamily : 'Railway1', 
+                            fontSize : 12, color : 'gray', paddingVertical : 5,
+                            textAlign : 'justify'
+                        }}>
+                            Lorem ipsum dolor sit amet consectetur adipis icing elit. 
+                            Maxime mollitia,molestiae quas vel sint.
+                        </Text>
+                        <Text style={{fontFamily : 'Railway1', color : Colors.btnGreen}}>From N3,000</Text>
+                        </View>
+
+                    </View>
+                    </TouchableOpacity>
+                </Link>
 
                 <TouchableOpacity>
                 <View style={{display : 'flex', 
