@@ -38,14 +38,14 @@ const index = () => {
 
             
           <View style={{display : 'flex', flexDirection : 'row', gap : 10, paddingTop : 10}}>
-            <TouchableOpacity style={styles.btnStyle} onPress={hideAndShowOne}>
-              <Ionicons name='fast-food' color={'white'} size={16}/>
-              <Text style={{fontFamily : 'Railway2', color : 'white', fontSize : 15}}>Restaurant</Text>
+            <TouchableOpacity style={show ? styles.btnStyle1 : styles.btnStyle} onPress={hideAndShowOne}>
+              <Ionicons name='fast-food' color={show ? Colors.btnGreen  : 'white' } size={16}/>
+              <Text style={show ? styles.btnText1 : styles.btnText}>Restaurant</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.btnStyle1} onPress={hideAndShowTwo}>
-              <Ionicons name='restaurant' size={16}/>
-              <Text style={{fontFamily : 'Railway1', fontSize : 15}}>Private Chef</Text>
+            <TouchableOpacity style={show ? styles.btnStyle : styles.btnStyle1} onPress={hideAndShowTwo}>
+              <Ionicons name='restaurant' size={16} color={!show ? Colors.btnGreen  : 'white' }/>
+              <Text style={show ? styles.btnText : styles.btnText1}>Private Chef</Text>
             </TouchableOpacity>
           
           </View>
@@ -307,6 +307,15 @@ const styles = StyleSheet.create({
     justifyContent : 'center',
     borderRadius : 50,
     gap : 5
+  },
+
+  btnText : {
+    fontFamily : 'Railway2', color : 'white', fontSize : 15
+  },
+
+
+  btnText1 : {
+    fontFamily : 'Railway2', color : Colors.btnGreen, fontSize : 15
   },
 
 
