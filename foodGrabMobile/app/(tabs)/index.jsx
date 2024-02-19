@@ -196,7 +196,7 @@ const index = () => {
             <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 10}}>Available Restaurants</Text>
             <View>
 
-              <View style={styles.restImageDiv}>
+              <TouchableOpacity style={styles.restImageDiv}>
                 <Image source={require('../../assets/images/rest1.png')}
                   resizeMode='cover'
                   style={styles.restImage}
@@ -215,9 +215,9 @@ const index = () => {
                       </TouchableOpacity>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
 
-              <View style={styles.restImageDiv}>
+              <TouchableOpacity style={styles.restImageDiv}>
                 <Image source={require('../../assets/images/rest2.png')}
                   resizeMode='cover'
                   style={styles.restImage}
@@ -236,10 +236,10 @@ const index = () => {
                       </TouchableOpacity>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
 
 
-              <View style={styles.restImageDiv}>
+              <TouchableOpacity style={styles.restImageDiv}>
                 <Image source={require('../../assets/images/rest1.png')}
                   resizeMode='cover'
                   style={styles.restImage}
@@ -258,7 +258,7 @@ const index = () => {
                       </TouchableOpacity>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
 
 
 
