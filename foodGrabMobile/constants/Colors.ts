@@ -20,7 +20,9 @@ export default {
   myRed:  '#EC1C23',
   myGreen : '#101010',
   myGray : '#D0D5DD',
+  myLightGray : '#EDEDED',
   myLightGreen : '#70AA67',
-  btnGreen : '#54804D'
+  btnGreen : '#54804D',
+
 
 };

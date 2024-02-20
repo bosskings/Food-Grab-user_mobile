@@ -61,7 +61,7 @@ const resturantPage = () => {
             </View>
 
             <ScrollView style={{paddingVertical : 10, height : '60%'}}>
-                <Link href={'/'} asChild> 
+                <Link href={'resturantDetails/orderPage'} asChild> 
                     <TouchableOpacity>
                     <View style={{display : 'flex', 
                         flexDirection : 'row', gap : 10, 

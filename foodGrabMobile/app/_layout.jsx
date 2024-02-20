@@ -17,7 +17,7 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'resturantDetails/resturantPage',
+  initialRouteName: '(tabs)',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -57,7 +57,21 @@ function RootLayoutNav() {
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <Stack>
 
-      <Stack.Screen name="resturantDetails/resturantPage" options={{
+
+        {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
+
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+        <Stack.Screen name="resturantDetails/orderPage" options={{ 
+          headerTitle : '',
+          headerLeft : ()=>(
+            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+            ),
+            
+            headerShadowVisible : false,
+        }} />
+
+        <Stack.Screen name="resturantDetails/resturantPage" options={{
         headerTitle : '',
         headerLeft : ()=>(
           <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
@@ -65,8 +79,7 @@ function RootLayoutNav() {
           
           headerShadowVisible : false,
         }} />
-      <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
 
       {/* ================ WELCOME SCREEN ============================= */}
 
@@ -99,6 +112,8 @@ function RootLayoutNav() {
 
       {/* ======================= LOGIN ===================================== */}
       <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
+
+      {/* ======================= DASHBOARD COMPONENTS ================================== */}
 
     </Stack>
     // </ThemeProvider>
