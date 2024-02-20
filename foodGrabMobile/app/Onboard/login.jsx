@@ -123,9 +123,11 @@ const register = () => {
                     </View>
             }
 
+            <Link href={'Onboard/OTPVerifcation'} asChild>
             <TouchableOpacity style={styles.btnStyles}>
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>Get Started</Text>
             </TouchableOpacity>
+            </Link>
 
             <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 15, fontFamily : 'Railway3',}}>
                 Don’t have an account? 

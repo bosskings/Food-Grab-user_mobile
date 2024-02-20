@@ -59,6 +59,7 @@ function RootLayoutNav() {
 
 
         {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
 
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
@@ -83,7 +84,7 @@ function RootLayoutNav() {
 
       {/* ================ WELCOME SCREEN ============================= */}
 
-      <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
+      {/* <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} /> */}
       <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />

@@ -22,7 +22,7 @@ const successfull = () => {
         </Text>
       </View>
 
-        <Link href={''} asChild>
+        <Link href={'Onboard/address'} asChild>
           <TouchableOpacity style={styles.btnStyles}>
             <Text style={{fontFamily : 'Railway2', color : 'white', fontSize : 15}}>Add Address</Text>
           </TouchableOpacity>

@@ -48,9 +48,11 @@ const OTPVerifcation = () => {
 
           <Text style={{textAlign : 'center', fontSize : 20, fontFamily : 'Railway3', paddingTop : 20}}>00:30</Text>
 
+          <Link href={'Onboard/successfull'} asChild>
           <TouchableOpacity style={styles.btnContainer} onPress={() => {/* handle verification */}}>
             <Text style={styles.btnText}>Verify my account</Text>
           </TouchableOpacity>
+          </Link>
 
 
           <Text style={{fontFamily : 'Railway1', paddingTop : 30, textAlign : 'center', fontSize : 15}}>Didn’t receive a code? 

@@ -1,8 +1,8 @@
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native'
 import React from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import {Link} from 'expo-router'
 const address = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -16,6 +16,12 @@ const address = () => {
                 <Ionicons size={20} name='search' style={{position : 'absolute', left : 20, top : 20}}/>
             </View>
         </View>
+
+        <Link href={''} asChild>
+          <TouchableOpacity style={styles.btnStyles}>
+            <Text style={{fontFamily : 'Railway2', color : 'white', fontSize : 15}}>Save & Continue</Text>
+          </TouchableOpacity>
+        </Link>
     </SafeAreaView>
   )
 }
@@ -38,5 +44,16 @@ const styles = StyleSheet.create({
         borderRadius : 5,
         fontSize : 15,
         position : 'relative'
+    },
+
+    btnStyles :{
+        height : 50,
+        backgroundColor : Colors.myRed,
+        flexDirection : 'row',
+        alignItems : 'center',
+        paddingHorizontal : 20,
+        justifyContent : 'center',
+        borderRadius : 10,  
+        marginTop : 40,
     },
 })
