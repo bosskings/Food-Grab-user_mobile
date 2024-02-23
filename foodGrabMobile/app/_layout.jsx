@@ -12,7 +12,7 @@ import { View } from '@/components/Themed';
 
 
 export {
-  
+
   ErrorBoundary,
 } from 'expo-router';
 
@@ -51,35 +51,35 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
-  const navigate = useNavigation() 
+  const navigate = useNavigation()
 
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <Stack>
 
 
-        {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
-        <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
+      {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
+      <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
 
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-        <Stack.Screen name="resturantDetails/orderPage" options={{ 
-          headerTitle : '',
-          headerLeft : ()=>(
-            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-            ),
-            
-            headerShadowVisible : false,
-        }} />
+      <Stack.Screen name="resturantDetails/orderPage" options={{
+        headerTitle: '',
+        headerLeft: () => (
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack} />
+        ),
 
-        <Stack.Screen name="resturantDetails/resturantPage" options={{
-        headerTitle : '',
-        headerLeft : ()=>(
-          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-          ),
-          
-          headerShadowVisible : false,
-        }} />
+        headerShadowVisible: false,
+      }} />
+
+      <Stack.Screen name="resturantDetails/resturantPage" options={{
+        headerTitle: '',
+        headerLeft: () => (
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack} />
+        ),
+
+        headerShadowVisible: false,
+      }} />
 
 
       {/* ================ WELCOME SCREEN ============================= */}
@@ -94,21 +94,21 @@ function RootLayoutNav() {
       <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
 
       <Stack.Screen name="Onboard/OTPVerifcation" options={{
-        headerTitle : '',
-        headerLeft : ()=>(
-          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+        headerTitle: '',
+        headerLeft: () => (
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack} />
         ),
 
-        headerShadowVisible : false,
+        headerShadowVisible: false,
       }} />
       <Stack.Screen name="Onboard/successfull" options={{ headerShown: false }} />
-      <Stack.Screen name="Onboard/address" options={{ 
-        headerTitle : '',
-        headerLeft : ()=>(
-          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+      <Stack.Screen name="Onboard/address" options={{
+        headerTitle: '',
+        headerLeft: () => (
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack} />
         ),
 
-        headerShadowVisible : false,
+        headerShadowVisible: false,
       }} />
 
       {/* ======================= LOGIN ===================================== */}
