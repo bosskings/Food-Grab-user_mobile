@@ -4,18 +4,21 @@ import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Link} from 'expo-router'
+import { BASE_URL } from '../utils/Enpoint';
+import axios from 'axios';
+import { ActivityIndicator } from 'react-native';
+import MyModal from '../modal/MyModal';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const register = () => {
 
     const [showActive, setShowActiveColor] = useState(false)
     const [showInActive, setShowInActiveColor] = useState(true)
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const [isChecked, setChecked] = useState(false);
-
-    const [password, setPassword] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-
-
-    const [password1, setPassword1] = useState(false);
+    const [showPassword, setShowPassword] = useState('');
     const [showPassword1, setShowPassword1] = useState('');
 
 
@@ -39,12 +42,73 @@ const register = () => {
     }
 
 
+    const closeModal = () =>{
+        setIsModalOpen(false)
+    }
+
+
+    const [fullname, setFullame] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [emptyField, setEmptyField] = useState('');
+    const [samePassword, setSamePassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false)
+
+    const handleSignup = async () => {
+        setIsLoading(true)
+
+        if (!fullname || !email || !password || !confirmPassword) {
+            setEmptyField('All Fields Required!! ')
+            setSamePassword('')
+            setIsModalOpen(true)
+            setIsLoading(false);
+            return;
+        }
+    
+        if (password !== confirmPassword) {
+            setSamePassword('Password & Confirm Password do not match')
+            setEmptyField('')
+            setIsLoading(false);
+            setIsModalOpen(true)
+            return;
+        }
+        try {
+            const response = await axios.post(`${BASE_URL}signup`, {
+                fullname,
+                email,
+                password,
+                confirmPassword,
+            });
+
+            const data = response;
+            
+            await AsyncStorage.setItem('user', JSON.stringify(data));
+            const statusMessage = response.data.mssg;
+            setIsLoading(false)
+            setIsModalOpen(true)
+            alert(statusMessage);
+
+        } catch (err) {
+            console.error(err);
+            alert('Signup failed!');
+            setIsModalOpen(true)
+        }
+    };
+
+
+
+    
+
+
   return (
     <SafeAreaView style={{flex : 1, backgroundColor : Colors.myRed}}>
+        
       <View style={styles.container}>
         <ScrollView >
-            <Text style={{fontFamily : 'Railway2', fontSize : 25}}>Get Started</Text>
-            <Text style={{fontFamily : 'Railway1', fontSize : 15}}>Sign up today and start placing your order</Text>
+            <Text style={{fontFamily : 'Railway2', fontSize : 20}}>Get Started</Text>
+            <Text style={{fontFamily : 'Railway1', fontSize : 13}}>Sign up today and start placing your order</Text>
 
             <View style={{
                 display : 'flex', flexDirection :'row', 
@@ -64,22 +128,20 @@ const register = () => {
                 showActive ? 
                     <View style={{paddingTop : 0}}>
                         <View style={styles.inputDiv}>
-                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Full Name</Text>
-                            <TextInput placeholder='Your name : ' style={styles.inputStyles}/>
+                            {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Full Name</Text> */}
+                            <TextInput placeholder='Your Fullname : ' style={styles.inputStyles}/>
                         </View>
 
                         <View style={styles.inputDiv}>
-                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Phone Number</Text>
+                            {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Phone Number</Text> */}
                             <TextInput placeholder='Phone Number : ' style={styles.inputStyles}/>
                         </View>
 
                         <View style={styles.inputDiv}>
-                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text>
+                            {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text> */}
                             <View>
                                 <TextInput placeholder='Password:' 
                                     style={styles.inputStyles}
-                                    secureTextEntry={!showPassword}
-                                    value={ password}
                                 />
 
                                 <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>
@@ -94,12 +156,11 @@ const register = () => {
                         </View>
 
                     <View style={styles.inputDiv}>
-                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text>
+                        {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text> */}
                         <View>
                             <TextInput placeholder='Confirm Password:' 
                                 style={styles.inputStyles}
-                                secureTextEntry={!showPassword1}
-                                value={ password1}
+   
                             />
 
                             <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
@@ -117,81 +178,93 @@ const register = () => {
                 : 
 
                     <View style={{paddingTop : 0}}>
-                    <View style={styles.inputDiv}>
-                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Full Name</Text>
-                        <TextInput placeholder='Your name : ' style={styles.inputStyles}/>
-                    </View>
-
-                    <View style={styles.inputDiv}>
-                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Email address</Text>
-                        <TextInput placeholder='Email address : ' style={styles.inputStyles}/>
-                    </View>
-
-                    <View style={styles.inputDiv}>
-                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text>
-                        <View>
-                            <TextInput placeholder='Password:' 
+                        <View style={styles.inputDiv}>
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Full Name</Text>
+                            <TextInput 
+                                placeholder='Your Fullname : ' 
                                 style={styles.inputStyles}
-                                secureTextEntry={!showPassword}
-                                value={ password}
+                                value={fullname}
+                                onChangeText={setFullame}
                             />
-
-                            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>
-                                {showPassword ? 
-                                    <Ionicons name='eye-off' size={20}/>
-                                    :
-                                    <Ionicons name='eye' size={20} /> 
-                                }
-                            </TouchableOpacity>
-                            
                         </View>
-                    </View>
 
-
-                    <View style={styles.inputDiv}>
-                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text>
-                        <View>
-                            <TextInput placeholder='Confirm Password:' 
+                        <View style={styles.inputDiv}>
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Email address</Text>
+                            <TextInput 
+                                placeholder='Email address : ' 
                                 style={styles.inputStyles}
-                                secureTextEntry={!showPassword1}
-                                value={ password1}
+                                value={email}
+                                onChangeText={setEmail}
                             />
-
-                            <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
-                                {showPassword1 ? 
-                                    <Ionicons name='eye-off' size={20}/>
-                                    :
-                                    <Ionicons name='eye' size={20} /> 
-                                }
-                            </TouchableOpacity>
-                            
                         </View>
-                    </View>
+
+                        <View style={styles.inputDiv}>
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Password</Text>
+                            <View>
+                                <TextInput placeholder='Password:' 
+                                    style={styles.inputStyles}
+                                    value={password}
+                                    onChangeText={setPassword}
+                                    secureTextEntry={!showPassword}
+                                />
+
+                                <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>
+                                    {showPassword ? 
+                                        <Ionicons name='eye-off' size={20}/>
+                                        :
+                                        <Ionicons name='eye' size={20} /> 
+                                    }
+                                </TouchableOpacity>
+                                
+                            </View>
+                        </View>
+
+                        <View style={styles.inputDiv}>
+                            <Text style={{ fontFamily: 'Railway3', paddingBottom: 10, fontSize: 13 }}>
+                                Confirm Password
+                            </Text>
+                            <View>
+                                <TextInput
+                                    placeholder='Confirm Password:'
+                                    style={styles.inputStyles}
+                                    value={confirmPassword}
+                                    onChangeText={setConfirmPassword}
+                                    secureTextEntry={!showPassword1}
+                                />
+
+                                <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
+                                    {showPassword1 ? <Ionicons name='eye-off' size={20} /> : <Ionicons name='eye' size={20} />}
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
                     </View>
             }
 
 
 
             <View style={{display : 'flex', flexDirection : 'row', gap : 5, paddingTop : 10, alignItems : 'center'}}>
-                <Checkbox style={{borderColor : Colors.myRed}} value={isChecked} onValueChange={setChecked} color={isChecked && Colors.myRed}/>
-                <Text style={{width : '90%', fontSize : 15, fontFamily : 'Railway1'}}>
+                <Checkbox style={{borderColor : Colors.myRed, width : 15, height : 15}} value={isChecked} onValueChange={setChecked} color={isChecked && Colors.myRed}/>
+                <Text style={{width : '90%', fontSize : 12, fontFamily : 'Railway1'}}>
                     If you are creating a new account, 
                     <Text style={{color : Colors.myRed}}>Terms & Conditions</Text> 
                     and  <Text style={{color : Colors.myRed}}>Privacy Policy</Text> will apply
                 </Text>
             </View>
 
-            <TouchableOpacity style={styles.btnStyles}>
-                <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>Get Started</Text>
+            <TouchableOpacity style={styles.btnStyles} onPress={handleSignup}>
+                <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Get Started'}</Text>
             </TouchableOpacity>
 
-            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 15, fontFamily : 'Railway3',}}>
+            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
                 Have an account? 
                 <Link href={'Onboard/login'}><Text style={{color : Colors.myRed}}>Login</Text></Link>
             </Text>
         </ScrollView>
 
       </View>
+
+      <MyModal isModalOpen={isModalOpen} emptyField={emptyField} closeModal={closeModal} samePassword={samePassword}/>
     </SafeAreaView>
   )
 }
@@ -211,7 +284,7 @@ const styles = StyleSheet.create({
 
     active : {
         backgroundColor : Colors.myRed,
-        padding : 15,
+        padding : 13,
         paddingHorizontal : 20,
         width : '50%',
         borderRadius : 5
@@ -219,12 +292,12 @@ const styles = StyleSheet.create({
 
     activeColor : {
         color : 'white',
-        fontSize : 15, fontFamily : 'Railway3'
+        fontSize : 13, fontFamily : 'Railway3'
     },
 
     inActive : {
         backgroundColor : 'white',
-        padding : 15,
+        padding : 13,
         paddingHorizontal : 20,
         width : '50%',
         borderRadius : 5
@@ -232,7 +305,7 @@ const styles = StyleSheet.create({
 
     inActiveColor : {
         color : Colors.myGreen,
-        fontSize : 15, fontFamily : 'Railway3'
+        fontSize : 13, fontFamily : 'Railway3'
     },
 
     inputDiv : {
@@ -245,8 +318,9 @@ const styles = StyleSheet.create({
         borderColor : Colors.myGray,
         borderWidth : 1,
         borderRadius : 5,
-        fontSize : 15,
-        position : 'relative'
+        fontSize : 13,
+        position : 'relative',
+        fontFamily : 'Railway3'
     },
 
     btnStyles :{

@@ -11,13 +11,14 @@ import { StatusBar } from 'expo-status-bar';
 import { View } from '@/components/Themed';
 
 
+
 export {
   
   ErrorBoundary,
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
+  initialRouteName: 'Onboard/register',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -59,6 +60,8 @@ function RootLayoutNav() {
 
 
         {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
+
+      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
         <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
 
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -91,7 +94,6 @@ function RootLayoutNav() {
 
 
       {/* ===================== ONBOARD ================================ */}
-      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
 
       <Stack.Screen name="Onboard/OTPVerifcation" options={{
         headerTitle : '',
