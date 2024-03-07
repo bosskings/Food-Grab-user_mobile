@@ -10,13 +10,7 @@ const register = () => {
     const [showActive, setShowActiveColor] = useState(false)
     const [showInActive, setShowInActiveColor] = useState(true)
 
-    const [isChecked, setChecked] = useState(false);
-
-    const [password, setPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-
-
-    const [password1, setPassword1] = useState(false);
     const [showPassword1, setShowPassword1] = useState('');
 
 
@@ -38,6 +32,10 @@ const register = () => {
         setShowActiveColor(false)
         setShowInActiveColor (true)
     }
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+  
 
 
   return (
@@ -106,8 +104,9 @@ const register = () => {
                         <View>
                             <TextInput placeholder='Password:' 
                                 style={styles.inputStyles}
+                                value={password}
+                                onChangeText={setPassword}
                                 secureTextEntry={!showPassword}
-                                value={ password}
                             />
 
                             <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>

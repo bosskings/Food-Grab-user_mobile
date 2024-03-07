@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput, Scro
 import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import {Link} from 'expo-router'
+import {Link, useNavigation} from 'expo-router'
 import { BASE_URL } from '../utils/Enpoint';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native';
@@ -16,6 +16,8 @@ const register = () => {
     const [showInActive, setShowInActiveColor] = useState(true)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpen1, setIsModalOpen1] = useState(false)
+    const [isModalOpen2, setIsModalOpen2] = useState(false)
 
     const [isChecked, setChecked] = useState(false);
     const [showPassword, setShowPassword] = useState('');
@@ -46,32 +48,42 @@ const register = () => {
         setIsModalOpen(false)
     }
 
+    const closeModal1 = () =>{
+        setIsModalOpen1(false)
+    }
+
+    const closeModal2 = () =>{
+        setIsModalOpen2(false)
+    }
+
 
     const [fullname, setFullame] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [emptyField, setEmptyField] = useState('');
-    const [samePassword, setSamePassword] = useState('');
+    const [emptyField, setEmptyField] = useState(false);
+    const [samePassword, setSamePassword] = useState(false);
+    const [statusMessage, setStatusMessage] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
+
+
+    const navigation = useNavigation()
 
     const handleSignup = async () => {
         setIsLoading(true)
 
         if (!fullname || !email || !password || !confirmPassword) {
             setEmptyField('All Fields Required!! ')
-            setSamePassword('')
             setIsModalOpen(true)
             setIsLoading(false);
             return;
         }
     
-        if (password !== confirmPassword) {
-            setSamePassword('Password & Confirm Password do not match')
-            setEmptyField('')
+        else if (password !== confirmPassword) {
+            setSamePassword('Password1 & Password2 must match')
             setIsLoading(false);
-            setIsModalOpen(true)
+            setIsModalOpen1(true)
             return;
         }
         try {
@@ -85,15 +97,15 @@ const register = () => {
             const data = response;
             
             await AsyncStorage.setItem('user', JSON.stringify(data));
-            const statusMessage = response.data.mssg;
+            setStatusMessage(response.data.mssg);
             setIsLoading(false)
-            setIsModalOpen(true)
-            alert(statusMessage);
+            setIsModalOpen2(true)
+            navigation.navigate('Onboard/login')
+
 
         } catch (err) {
             console.error(err);
             alert('Signup failed!');
-            setIsModalOpen(true)
         }
     };
 
@@ -127,21 +139,29 @@ const register = () => {
             { 
                 showActive ? 
                     <View style={{paddingTop : 0}}>
-                        <View style={styles.inputDiv}>
-                            {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Full Name</Text> */}
-                            <TextInput placeholder='Your Fullname : ' style={styles.inputStyles}/>
+                      <View style={styles.inputDiv}>
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Full Name</Text>
+                            <TextInput 
+                                placeholder='Your Fullname : ' 
+                                style={styles.inputStyles}
+                                value={fullname}
+                                onChangeText={setFullame}
+                            />
                         </View>
 
                         <View style={styles.inputDiv}>
-                            {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Phone Number</Text> */}
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Phone Number</Text>
                             <TextInput placeholder='Phone Number : ' style={styles.inputStyles}/>
                         </View>
 
                         <View style={styles.inputDiv}>
-                            {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text> */}
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Password</Text>
                             <View>
                                 <TextInput placeholder='Password:' 
                                     style={styles.inputStyles}
+                                    value={password}
+                                    onChangeText={setPassword}
+                                    secureTextEntry={!showPassword}
                                 />
 
                                 <TouchableOpacity onPress={togglePasswordVisibility} style={styles.iconStyle}>
@@ -155,24 +175,24 @@ const register = () => {
                             </View>
                         </View>
 
-                    <View style={styles.inputDiv}>
-                        {/* <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Confirm Password</Text> */}
-                        <View>
-                            <TextInput placeholder='Confirm Password:' 
-                                style={styles.inputStyles}
-   
-                            />
+                        <View style={styles.inputDiv}>
+                            <Text style={{ fontFamily: 'Railway3', paddingBottom: 10, fontSize: 13 }}>
+                                Confirm Password
+                            </Text>
+                            <View>
+                                <TextInput
+                                    placeholder='Confirm Password:'
+                                    style={styles.inputStyles}
+                                    value={confirmPassword}
+                                    onChangeText={setConfirmPassword}
+                                    secureTextEntry={!showPassword1}
+                                />
 
-                            <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
-                                {showPassword1 ? 
-                                    <Ionicons name='eye-off' size={20}/>
-                                    :
-                                    <Ionicons name='eye' size={20} /> 
-                                }
-                            </TouchableOpacity>
-                            
+                                <TouchableOpacity onPress={togglePasswordVisibility1} style={styles.iconStyle}>
+                                    {showPassword1 ? <Ionicons name='eye-off' size={20} /> : <Ionicons name='eye' size={20} />}
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
                     </View> 
                 
                 : 
@@ -264,7 +284,17 @@ const register = () => {
 
       </View>
 
-      <MyModal isModalOpen={isModalOpen} emptyField={emptyField} closeModal={closeModal} samePassword={samePassword}/>
+      <MyModal 
+            isModalOpen={isModalOpen} 
+            isModalOpen1={isModalOpen1} 
+            isModalOpen2={isModalOpen2} 
+            statusMessage={statusMessage} 
+            emptyField={emptyField} 
+            closeModal={closeModal} 
+            samePassword={samePassword}
+            closeModal1={closeModal1}
+            closeModal2={closeModal2}
+        />
     </SafeAreaView>
   )
 }
@@ -338,5 +368,7 @@ const styles = StyleSheet.create({
         position : 'absolute',
         top : 15,
         right : 30,
-    }
+    },
+
+
 })
