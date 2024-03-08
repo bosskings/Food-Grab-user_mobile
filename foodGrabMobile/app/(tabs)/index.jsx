@@ -7,6 +7,10 @@ import DashHeader from '../../components/DashHeader';
 import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { StatusBar } from 'expo-status-bar';
+
+// import { StatusBar } from 'react-native';
+
 const index = () => {
 
   const [show, setShow] = useState(false);
@@ -266,6 +270,8 @@ const index = () => {
           </ScrollView>
         }
 
+      <StatusBar style='dark' />
+
     </SafeAreaView>
 
   )
@@ -277,7 +283,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor : 'white',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        paddingTop : 0,
+        // marginTop : 50
     },
 
     imageDIv : {

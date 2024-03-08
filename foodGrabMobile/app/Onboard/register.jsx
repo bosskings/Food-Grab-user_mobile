@@ -8,6 +8,8 @@ import { BASE_URL } from '../utils/Enpoint';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native';
 import MyModal from '../modal/MyModal';
+import { StatusBar } from 'expo-status-bar';
+
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const register = () => {
@@ -100,7 +102,9 @@ const register = () => {
             setStatusMessage(response.data.mssg);
             setIsLoading(false)
             setIsModalOpen2(true)
-            navigation.navigate('Onboard/login')
+            if (response.data.status === 'SUCCESS'){
+                navigation.navigate('Onboard/login')
+            }
 
 
         } catch (err) {
@@ -115,7 +119,8 @@ const register = () => {
 
 
   return (
-    <SafeAreaView style={{flex : 1, backgroundColor : Colors.myRed}}>
+    <SafeAreaView style={{flex : 1, backgroundColor : Colors.myRed,}}>
+        <StatusBar style='light'/>
         
       <View style={styles.container}>
         <ScrollView >
@@ -305,10 +310,10 @@ const styles = StyleSheet.create({
     container : {
         flex : 1,
         backgroundColor : 'white',
-        marginTop : 90, 
+        marginTop : 70, 
         borderTopEndRadius : 20,
         borderTopLeftRadius : 20,
-        paddingTop : 20,
+        paddingTop : 30,
         paddingHorizontal : 20,
     },
 

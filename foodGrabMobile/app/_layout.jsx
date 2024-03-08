@@ -18,7 +18,7 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'Onboard/register',
+  initialRouteName: 'Onboard/login',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -30,7 +30,10 @@ export default function RootLayout() {
     Railway2: require('../assets/fonts/Raleway-Bold.ttf'),
     Railway3: require('../assets/fonts/Raleway-SemiBold.ttf'),
     ...FontAwesome.font,
+
   });
+  <StatusBar style='light'/>
+
 
   useEffect(() => {
     if (error) throw error;
@@ -41,13 +44,14 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
-
+  
   if (!loaded) {
     return null;
   }
-
+  
   return <RootLayoutNav />;
 }
+<StatusBar style='light'/>
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
@@ -55,13 +59,14 @@ function RootLayoutNav() {
   const navigate = useNavigation() 
 
   return (
-    // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    
     <Stack>
 
 
         {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
 
-        <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
+      <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
+
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
 
@@ -93,6 +98,7 @@ function RootLayoutNav() {
 
 
       {/* ===================== ONBOARD ================================ */}
+      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
 
       <Stack.Screen name="Onboard/OTPVerifcation" options={{
         headerTitle : '',
@@ -113,11 +119,10 @@ function RootLayoutNav() {
       }} />
 
       {/* ======================= LOGIN ===================================== */}
-      <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Onboard/login" options={{ headerShown: false }} /> */}
 
       {/* ======================= DASHBOARD COMPONENTS ================================== */}
 
     </Stack>
-    // </ThemeProvider>
   );
 }

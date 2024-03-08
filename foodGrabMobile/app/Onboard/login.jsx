@@ -5,6 +5,10 @@ import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { BASE_URL } from '../utils/Enpoint';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const register = () => {
 
     const [showActive, setShowActiveColor] = useState(false)
@@ -33,9 +37,29 @@ const register = () => {
         setShowInActiveColor (true)
     }
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   
+      
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post(`${BASE_URL}signin`, { email, password });
+            const data = response
+        
+            // Store the token in AsyncStorage
+            await AsyncStorage.setItem('user', JSON.stringify(data));
+            if (response.data.status === 'SUCCESS'){
+                alert('Login successful')
+            }
+    
+        } catch (error) {
+            alert('Login failed');
+            console.log(error);
+        }
+    };
+
+
+    
 
 
   return (
@@ -94,10 +118,15 @@ const register = () => {
 
                     <View style={{paddingTop : 0}}>
 
-                    <View style={styles.inputDiv}>
-                        <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Email address</Text>
-                        <TextInput placeholder='Email address : ' style={styles.inputStyles}/>
-                    </View>
+                        <View style={styles.inputDiv}>
+                            <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 13}}>Email address</Text>
+                            <TextInput 
+                                placeholder='Email address : ' 
+                                style={styles.inputStyles}
+                                value={email}
+                                onChangeText={setEmail}
+                            />
+                        </View>
 
                     <View style={styles.inputDiv}>
                         <Text style={{fontFamily : 'Railway3', paddingBottom : 10, fontSize : 15}}>Password</Text>
@@ -122,13 +151,11 @@ const register = () => {
                     </View>
             }
 
-            <Link href={'Onboard/OTPVerifcation'} asChild>
-            <TouchableOpacity style={styles.btnStyles}>
+            <TouchableOpacity style={styles.btnStyles} onPress={handleLogin}>
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>Get Started</Text>
             </TouchableOpacity>
-            </Link>
 
-            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 15, fontFamily : 'Railway3',}}>
+            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
                 Don’t have an account? 
                 <Link href={'Onboard/register'}><Text style={{color : Colors.myRed}}>Sign up</Text></Link>
             </Text>
@@ -145,7 +172,7 @@ const styles = StyleSheet.create({
     container : {
         flex : 1,
         backgroundColor : 'white',
-        marginTop : 90, 
+        marginTop : 50, 
         borderTopEndRadius : 20,
         borderTopLeftRadius : 20,
         paddingTop : 20,
@@ -154,7 +181,7 @@ const styles = StyleSheet.create({
 
     active : {
         backgroundColor : Colors.myRed,
-        padding : 15,
+        padding : 13,
         paddingHorizontal : 20,
         width : '50%',
         borderRadius : 5
@@ -162,12 +189,12 @@ const styles = StyleSheet.create({
 
     activeColor : {
         color : 'white',
-        fontSize : 15, fontFamily : 'Railway3'
+        fontSize : 13, fontFamily : 'Railway3'
     },
 
     inActive : {
         backgroundColor : 'white',
-        padding : 15,
+        padding : 13,
         paddingHorizontal : 20,
         width : '50%',
         borderRadius : 5
@@ -175,7 +202,7 @@ const styles = StyleSheet.create({
 
     inActiveColor : {
         color : Colors.myGreen,
-        fontSize : 15, fontFamily : 'Railway3'
+        fontSize : 13, fontFamily : 'Railway3'
     },
 
     inputDiv : {

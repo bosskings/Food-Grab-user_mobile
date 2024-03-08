@@ -12,14 +12,17 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 
-export default function TabLayout() {
 
+export default function TabLayout() {
+  
   const [loaded, error] = useFonts({
     Railway1: require('../../assets/fonts/Raleway-Regular.ttf'),
     Railway2: require('../../assets/fonts/Raleway-Bold.ttf'),
     Railway3: require('../../assets/fonts/Raleway-SemiBold.ttf'),
     ...FontAwesome.font,
   });
+
+  
 
   useEffect(() => {
     if (error) throw error;
@@ -37,7 +40,7 @@ export default function TabLayout() {
 
   return (
     <Tabs screenOptions={{
-
+      
       headerShown : false,
 
       tabBarStyle : {
