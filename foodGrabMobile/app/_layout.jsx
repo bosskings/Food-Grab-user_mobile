@@ -32,7 +32,7 @@ const RootLayoutNav = () => {
     <AuthProvider>
     
     <Stack>
-        {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="homeDash" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="orderPage" options={{ 
         headerTitle : '',
@@ -51,37 +51,6 @@ const RootLayoutNav = () => {
         
         headerShadowVisible : false,
       }} />
-      {/* ================ WELCOME SCREEN ============================= */}
-
-      <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
-      <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
-      <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
-
-      {/* ===================== ONBOARD ================================ */}
-      <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
-      <Stack.Screen name="Onboard/OTPVerifcation" options={{
-        headerTitle : '',
-        headerLeft : ()=>(
-          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-        ),
-
-        headerShadowVisible : false,
-      }} />
-      <Stack.Screen name="Onboard/successfull" options={{ headerShown: false }} />
-      <Stack.Screen name="Onboard/address" options={{ 
-        headerTitle : '',
-        headerLeft : ()=>(
-          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-        ),
-
-        headerShadowVisible : false,
-      }} />
-
-      {/* ======================= LOGIN ===================================== */}
-      {/* <Stack.Screen name="Onboard/login" options={{ headerShown: false }} /> */}
-
-      {/* ======================= DASHBOARD COMPONENTS ================================== */}
-
     </Stack>
     </AuthProvider>
   );
