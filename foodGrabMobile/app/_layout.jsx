@@ -10,20 +10,14 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
 import { View } from '@/components/Themed';
 
+import {AuthProvider} from './context/AuthContext'
 
 
-export {
-  
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  initialRouteName: 'Onboard/login',
-};
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+const RootLayoutNav = () => {
+
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     Railway1: require('../assets/fonts/Raleway-Regular.ttf'),
@@ -32,74 +26,41 @@ export default function RootLayout() {
     ...FontAwesome.font,
 
   });
-  <StatusBar style='light'/>
-
-
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-  
-  if (!loaded) {
-    return null;
-  }
-  
-  return <RootLayoutNav />;
-}
-<StatusBar style='light'/>
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
-  const navigate = useNavigation() 
 
   return (
+
+    <AuthProvider>
     
     <Stack>
-
-
         {/* <Stack.Screen name="homeDash/homeDash" options={{ headerShown: false }} /> */}
-
       <Stack.Screen name="Onboard/login" options={{ headerShown: false }} />
-
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
-
-
-        <Stack.Screen name="resturantDetails/orderPage" options={{ 
-          headerTitle : '',
-          headerLeft : ()=>(
-            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-            ),
-            
-            headerShadowVisible : false,
-        }} />
-
-        <Stack.Screen name="resturantDetails/resturantPage" options={{
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="welcomes/wecomeOne" options={{ headerShown: false }} />
+      <Stack.Screen name="resturantDetails/orderPage" options={{ 
         headerTitle : '',
         headerLeft : ()=>(
           <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
           ),
           
           headerShadowVisible : false,
-        }} />
+      }} />
 
-
+      <Stack.Screen name="resturantDetails/resturantPage" options={{
+      headerTitle : '',
+      headerLeft : ()=>(
+        <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+        ),
+        
+        headerShadowVisible : false,
+      }} />
       {/* ================ WELCOME SCREEN ============================= */}
 
       <Stack.Screen name="welcomes/welcomeTwo" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeThree" options={{ headerShown: false }} />
       <Stack.Screen name="welcomes/welcomeFour" options={{ headerShown: false }} />
 
-
       {/* ===================== ONBOARD ================================ */}
       <Stack.Screen name="Onboard/register" options={{ headerShown: false }} />
-
       <Stack.Screen name="Onboard/OTPVerifcation" options={{
         headerTitle : '',
         headerLeft : ()=>(
@@ -124,5 +85,6 @@ function RootLayoutNav() {
       {/* ======================= DASHBOARD COMPONENTS ================================== */}
 
     </Stack>
+    </AuthProvider>
   );
 }

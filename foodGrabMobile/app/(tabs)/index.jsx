@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -8,10 +8,10 @@ import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { StatusBar } from 'expo-status-bar';
-
-// import { StatusBar } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
 
 const index = () => {
+  // const {logout} = useContext(AuthContext)
 
   const [show, setShow] = useState(false);
 
@@ -32,6 +32,10 @@ const index = () => {
           <TextInput placeholder='Search for your favourite food' style={styles.inputStyles}/>
           <Ionicons name='filter' size={15} style={{position : 'absolute', top : 35, right :15}}/>
         </View>
+
+        {/* <TouchableOpacity onPress={()=>{logout()}}>
+          <Text>Logout</Text>
+        </TouchableOpacity> */}
 
         <View>
             <View style={{paddingVertical : 10, paddingBottom : 0, }}>

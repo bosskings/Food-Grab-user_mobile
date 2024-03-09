@@ -5,11 +5,17 @@ import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { BASE_URL } from '../utils/Enpoint';
+import { BASE_URL } from '../Endpoint/Enpoint';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActivityIndicator } from 'react-native';
+import {AuthContext} from '../context/AuthContext'
 
+import { useContext } from 'react';
 const register = () => {
+
+    const {login} = useContext(AuthContext);
+
 
     const [showActive, setShowActiveColor] = useState(false)
     const [showInActive, setShowInActiveColor] = useState(true)
@@ -40,24 +46,33 @@ const register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   
-      
+    const [isLoading, setIsLoading] = useState(false)
+
     const handleLogin = async () => {
+        // setIsLoading(true);
         try {
             const response = await axios.post(`${BASE_URL}signin`, { email, password });
-            const data = response
-        
-            // Store the token in AsyncStorage
-            await AsyncStorage.setItem('user', JSON.stringify(data));
-            if (response.data.status === 'SUCCESS'){
-                alert('Login successful')
+            const data = response.data;
+    
+            if (data.status === 'SUCCESS......') {
+                await AsyncStorage.setItem('data', JSON.stringify(data));
+    
+                alert('Login successful');
+                setIsLoading(false);
+
+            } else {
+                alert('Login failed');
+                // setIsLoading(false);
             }
     
+            console.log(data);
+
         } catch (error) {
-            alert('Login failed');
+            alert(error);
             console.log(error);
+            // setIsLoading(false);
         }
     };
-
 
     
 
@@ -151,8 +166,8 @@ const register = () => {
                     </View>
             }
 
-            <TouchableOpacity style={styles.btnStyles} onPress={handleLogin}>
-                <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>Get Started</Text>
+            <TouchableOpacity style={styles.btnStyles} onPress={()=>{login()}}>
+                <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Signin'}</Text>
             </TouchableOpacity>
 
             <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>

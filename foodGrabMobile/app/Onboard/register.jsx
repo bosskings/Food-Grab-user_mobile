@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {Link, useNavigation} from 'expo-router'
-import { BASE_URL } from '../utils/Enpoint';
+import { BASE_URL } from '../Endpoint/Enpoint';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native';
 import MyModal from '../modal/MyModal';
