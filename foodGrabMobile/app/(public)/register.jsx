@@ -7,7 +7,7 @@ import {Link, useNavigation} from 'expo-router'
 import { BASE_URL } from '../Endpoint/Enpoint';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native';
-import MyModal from '../modal/MyModal';
+import MyModal from './modal/MyModal';
 import { StatusBar } from 'expo-status-bar';
 
 
