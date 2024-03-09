@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -7,7 +7,11 @@ import DashHeader from '../../components/DashHeader';
 import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { StatusBar } from 'expo-status-bar';
+import { AuthContext } from '../context/AuthContext';
+
 const index = () => {
+  // const {logout} = useContext(AuthContext)
 
   const [show, setShow] = useState(false);
 
@@ -20,8 +24,8 @@ const index = () => {
   }
 
   return (
-    <View style={styles.container}>
-      {/* <DashHeader /> */}
+    <SafeAreaView style={styles.container}>
+      <DashHeader />
 
       <View style={{ position: 'relative', paddingTop: 15 }}>
         <Ionicons name='search' size={15} style={{ position: 'absolute', top: 35, left: 15 }} />
@@ -274,7 +278,9 @@ const index = () => {
         </ScrollView>
       }
 
-    </View>
+      <StatusBar style='dark' />
+
+    </SafeAreaView>
 
   )
 }
@@ -284,9 +290,10 @@ export default index
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
     backgroundColor: 'white',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    paddingTop: 0,
+    // marginTop : 50
   },
 
   imageDIv: {
