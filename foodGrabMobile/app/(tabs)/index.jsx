@@ -36,9 +36,9 @@ const index = () => {
           <Ionicons name='filter' size={15} style={{position : 'absolute', top : 35, right :15}}/>
         </View>
 
-        <TouchableOpacity onPress={logoutFun}>
+        {/* <TouchableOpacity onPress={logoutFun}>
           <Text>Logout</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View>
             <View style={{paddingVertical : 0, paddingBottom : 0, }}>

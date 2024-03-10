@@ -11,7 +11,7 @@ import { ErrorBoundary } from 'expo-router';
 
 
 export const unstable_settings = {
-  initialRouteName: '',
+  initialRouteName: '(tabs)',
 };
 
 export {
@@ -59,7 +59,13 @@ const RootLayoutNav = () => {
   const navigate = useNavigation()
   const {userToken} = useContext(AuthContext)
 
-  const publicScreens = (
+
+
+
+  return (
+    <>
+
+      {userToken === null ? 
       <Stack>
         <Stack.Screen name="public/login" options={{ headerShown: false }} />
         
@@ -87,12 +93,12 @@ const RootLayoutNav = () => {
 
         <Stack.Screen name="public/register" options={{ headerShown: false }} />
       </Stack>
-  )
-  
-  const authenticatedScreens = (
 
+      :
+
+
+      
       <Stack>
-
         {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="auth/orderPage" options={{ 
@@ -113,8 +119,7 @@ const RootLayoutNav = () => {
         }} />   
 
       </Stack>
+    }
+    </>
   )
-
-
-  return userToken !== null ? authenticatedScreens : publicScreens;
 }

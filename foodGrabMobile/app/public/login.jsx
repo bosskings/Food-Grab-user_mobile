@@ -169,7 +169,7 @@ const register = () => {
                     </View>
             }
 
-            <TouchableOpacity style={styles.btnStyles} onPress={loginFun}>
+            <TouchableOpacity style={styles.btnStyles}>
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Signin'}</Text>
             </TouchableOpacity>
 
