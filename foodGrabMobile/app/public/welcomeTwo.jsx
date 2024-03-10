@@ -21,7 +21,7 @@ const welcomeTwo = () => {
         </View>
 
         
-        <Link href={'welcomes/welcomeThree'} asChild>        
+        <Link href={'public/welcomeThree'} asChild>        
           <TouchableOpacity style={styles.btnStyles}>
               <Text style={{fontSize : 18, color : 'white', fontFamily : 'Railway2'}}>Next</Text>
             </TouchableOpacity>

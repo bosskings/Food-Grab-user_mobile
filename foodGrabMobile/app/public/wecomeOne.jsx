@@ -21,7 +21,7 @@ const wecomeOne = () => {
         </View>
 
         
-        <Link href={'welcomes/welcomeTwo'} asChild>        
+        <Link href={'public/welcomeTwo'} asChild>        
           <TouchableOpacity style={styles.btnStyles}>
               <Text style={{fontSize : 18, color : 'white', fontFamily : 'Railway2'}}>Grant Permission</Text>
             </TouchableOpacity>

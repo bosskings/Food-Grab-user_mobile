@@ -9,7 +9,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
+  initialRouteName: 'public/register',
 };
 
 export {
@@ -54,14 +54,13 @@ const RootLayoutNav = () => {
 
     <AuthProvider>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
-        <Stack.Screen name="public/login" options={{ headerShown: false }} />
         <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
+        <Stack.Screen name="public/login" options={{ headerShown: false }} />
+        <Stack.Screen name="public/register" options={{ headerShown: false }} />
+
         <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeFour" options={{ headerShown: false }} />
-        <Stack.Screen name="public/register" options={{ headerShown: false }} />
         <Stack.Screen name="public/OTPVerifcation" options={{
             headerTitle : '',
             headerLeft : ()=>(
@@ -82,6 +81,8 @@ const RootLayoutNav = () => {
 
 
         {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
         <Stack.Screen name="auth/orderPage" options={{ 
             headerTitle : '',
             headerLeft : ()=>(

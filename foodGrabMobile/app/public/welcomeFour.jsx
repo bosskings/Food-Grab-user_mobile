@@ -12,13 +12,13 @@ const welcomeFour = () => {
 
         {/* ========= Text =============== */}
         
-        <Link href={'Onboard/register'} asChild>        
+        <Link href={'public/register'} asChild>        
           <TouchableOpacity style={styles.btnStyles1}>
               <Text style={{fontSize : 18, color : 'white', fontFamily : 'Railway2'}}>Get Started</Text>
             </TouchableOpacity>
         </Link>
 
-        <Link href={'Onboard/login'} asChild>        
+        <Link href={'public/login'} asChild>        
           <TouchableOpacity style={styles.btnStyles}>
               <Text style={{fontSize : 18, color : Colors.myGreen, fontFamily : 'Railway2'}}>Login</Text>
             </TouchableOpacity>

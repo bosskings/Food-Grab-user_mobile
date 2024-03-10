@@ -30,7 +30,7 @@ const index = () => {
         <DashHeader />
         <StatusBar style='dark'/>
 
-        <View style={{position : 'relative', paddingTop : 15}}>
+        <View style={{position : 'relative', paddingTop : 15, paddingBottom : 0}}>
           <Ionicons name='search' size={15} style={{position : 'absolute', top : 35, left : 15}}/>
           <TextInput placeholder='Search for your favourite food' style={styles.inputStyles}/>
           <Ionicons name='filter' size={15} style={{position : 'absolute', top : 35, right :15}}/>
@@ -41,7 +41,7 @@ const index = () => {
         </TouchableOpacity> */}
 
         <View>
-            <View style={{paddingVertical : 10, paddingBottom : 0, }}>
+            <View style={{paddingVertical : 0, paddingBottom : 0, }}>
               <Image source={require('../../assets/images/dashSec2.png')}
                 style={styles.imageDIv}
                 resizeMode='contain'
@@ -49,7 +49,7 @@ const index = () => {
             </View>
 
             
-          <View style={{display : 'flex', flexDirection : 'row', gap : 10, paddingTop : 10}}>
+          <View style={{display : 'flex', flexDirection : 'row', gap : 10, paddingTop : 0}}>
             <TouchableOpacity style={show ? styles.btnStyle1 : styles.btnStyle} onPress={hideAndShowOne}>
               <Ionicons name='fast-food' color={show ? Colors.btnGreen  : 'white' } size={16}/>
               <Text style={show ? styles.btnText1 : styles.btnText}>Restaurant</Text>
@@ -66,7 +66,7 @@ const index = () => {
 
 
         { show ? 
-          <ScrollView style={{paddingTop : 20, }}>
+          <ScrollView style={{paddingTop : 20, }} showsVerticalScrollIndicator={false}>
             <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 20}}>Recommend Chef</Text>
             <TouchableOpacity>
               <View style={{display : 'flex', 
@@ -204,7 +204,7 @@ const index = () => {
             
           </ScrollView> :
                       
-          <ScrollView style={{paddingTop : 20, }}>
+          <ScrollView style={{paddingTop : 20, }} showsVerticalScrollIndicator={false}>
             <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 10}}>Available Restaurants</Text>
             <View>
 
@@ -277,7 +277,6 @@ const index = () => {
           </ScrollView>
         }
 
-      <StatusBar style='dark' />
 
     </SafeAreaView>
 

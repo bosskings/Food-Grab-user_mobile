@@ -103,7 +103,7 @@ const register = () => {
             setIsLoading(false)
             setIsModalOpen2(true)
             if (response.data.status === 'SUCCESS'){
-                navigation.navigate('Onboard/login')
+                navigation.navigate('public/login')
             }
 
 
@@ -283,7 +283,7 @@ const register = () => {
 
             <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
                 Have an account? 
-                <Link href={''}><Text style={{color : Colors.myRed}}>Login</Text></Link>
+                <Link href={'public/login'}><Text style={{color : Colors.myRed}}>Login</Text></Link>
             </Text>
         </ScrollView>
 

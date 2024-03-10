@@ -172,7 +172,7 @@ const register = () => {
 
             <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
                 Don’t have an account? 
-                <Link href={''}><Text style={{color : Colors.myRed}}>Sign up</Text></Link>
+                <Link href={'public/register'}><Text style={{color : Colors.myRed}}>Sign up</Text></Link>
             </Text>
         </ScrollView>
 
