@@ -56,9 +56,10 @@ const register = () => {
         try {
             const response = await axios.post(`${BASE_URL}signin`, { email, password });
             const data = response.data;
-    
+
+            
             if (data.status === 'SUCCESS') {
-                await AsyncStorage.setItem('data', JSON.stringify(data));
+                await AsyncStorage.setItem('token', JSON.stringify(data.token));
     
                 alert('Login successful');
                 setIsLoading(false);
@@ -169,7 +170,7 @@ const register = () => {
                     </View>
             }
 
-            <TouchableOpacity style={styles.btnStyles}>
+            <TouchableOpacity style={styles.btnStyles} onPress={handleLogin}>
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Signin'}</Text>
             </TouchableOpacity>
 

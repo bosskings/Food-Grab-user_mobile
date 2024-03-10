@@ -59,9 +59,6 @@ const RootLayoutNav = () => {
   const navigate = useNavigation()
   const {userToken} = useContext(AuthContext)
 
-
-
-
   return (
     <>
 
@@ -96,8 +93,6 @@ const RootLayoutNav = () => {
 
       :
 
-
-      
       <Stack>
         {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

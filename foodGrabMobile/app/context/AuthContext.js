@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, {createContext, useState} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 import {useNavigation} from 'expo-router'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
@@ -9,22 +9,25 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigation()
 
-    const [userToken, setUserToken] = useState('token123')
-    const [isLoading, setIsLoading] = useState(true)
+    const [userToken, setUserToken] = useState(null)
 
-  // alert(userToken)
 
-    const loginFun = ()=>{
-        setUserToken('token123')
+    const isLoggedIn = async() =>{
+      try {
+        let userToken = await AsyncStorage.getItem('token')
+        setUserToken(userToken)
+      } catch (error) {
+        alert(error)
+      }
     }
 
+    useEffect(() =>{
+      isLoggedIn()
+    }, [])
 
-    const logoutFun = ()=>{    
-        setUserToken(null)
-    }
 
   return (
-    <AuthContext.Provider value={{loginFun, logoutFun, userToken}}>
+    <AuthContext.Provider value={{userToken}}>
         {children}
     </AuthContext.Provider>
   )
