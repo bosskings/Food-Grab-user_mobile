@@ -22,10 +22,13 @@ const index = () => {
   const hideAndShowTwo = () =>{
     setShow(true);
   }
+
+
   
   return (
     <SafeAreaView style={styles.container}>
         <DashHeader />
+        <StatusBar style='dark'/>
 
         <View style={{position : 'relative', paddingTop : 15}}>
           <Ionicons name='search' size={15} style={{position : 'absolute', top : 35, left : 15}}/>

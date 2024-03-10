@@ -52,7 +52,7 @@ const RootLayoutNav = () => {
   const navigate = useNavigation()
   return (
 
-    // <AuthProvider>
+    <AuthProvider>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
@@ -100,6 +100,6 @@ const RootLayoutNav = () => {
             headerShadowVisible : false,
         }} />   
       </Stack>
-    // </AuthProvider>
+  </AuthProvider>
   );
 }
