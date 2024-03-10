@@ -14,7 +14,7 @@ import {AuthContext} from '../context/AuthContext'
 import { useContext } from 'react';
 const register = () => {
 
-    const {login} = useContext(AuthContext);
+    // const {login} = useContext(AuthContext);
 
 
     const [showActive, setShowActiveColor] = useState(false)
@@ -166,13 +166,13 @@ const register = () => {
                     </View>
             }
 
-            <TouchableOpacity style={styles.btnStyles} onPress={()=>{login()}}>
+            <TouchableOpacity style={styles.btnStyles}>
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Signin'}</Text>
             </TouchableOpacity>
 
             <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
                 Don’t have an account? 
-                <Link href={'Onboard/register'}><Text style={{color : Colors.myRed}}>Sign up</Text></Link>
+                <Link href={''}><Text style={{color : Colors.myRed}}>Sign up</Text></Link>
             </Text>
         </ScrollView>
 

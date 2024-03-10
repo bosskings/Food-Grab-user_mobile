@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import DashHeader from '../../components/DashHeader';
+import DashHeader from '../components/DashHeader'
 import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 

@@ -1,22 +1,22 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack, useNavigation } from 'expo-router';
+import {AuthContext, AuthProvider} from './context/AuthContext'
+import { useContext, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import { Text } from '@/components/Themed';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useColorScheme } from '@/components/useColorScheme';
-import { StatusBar } from 'expo-status-bar';
-import { View } from '@/components/Themed';
-
-import {AuthProvider} from './context/AuthContext'
 
 
+export const unstable_settings = {
+  initialRouteName: '(tabs)',
+};
 
-SplashScreen.preventAutoHideAsync();
+export {
+  ErrorBoundary,
+} from 'expo-router';
 
-const RootLayoutNav = () => {
+
+
+export default function RootLayout() {
 
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -27,31 +27,76 @@ const RootLayoutNav = () => {
 
   });
 
+
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
+
+  
+  return <RootLayoutNav />;
+}
+
+const RootLayoutNav = () => {
   return (
 
-    <AuthProvider>
-    
-    <Stack>
-        <Stack.Screen name="homeDash" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="orderPage" options={{ 
-        headerTitle : '',
-        headerLeft : ()=>(
-          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-          ),
-          
-          headerShadowVisible : false,
-      }} />
+    // <AuthProvider>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-      <Stack.Screen name="resturantPage" options={{
-      headerTitle : '',
-      headerLeft : ()=>(
-        <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-        ),
-        
-        headerShadowVisible : false,
-      }} />
-    </Stack>
-    </AuthProvider>
+        <Stack.Screen name="public/login" options={{ headerShown: false }} />
+        <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
+        <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
+        <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
+        <Stack.Screen name="public/welcomeFour" options={{ headerShown: false }} />
+        <Stack.Screen name="public/register" options={{ headerShown: false }} />
+        <Stack.Screen name="public/OTPVerifcation" options={{
+            headerTitle : '',
+            headerLeft : ()=>(
+            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+            ),
+
+            headerShadowVisible : false,
+        }} />
+        <Stack.Screen name="public/successfull" options={{ headerShown: false }} />
+        <Stack.Screen name="public/address" options={{ 
+            headerTitle : '',
+            headerLeft : ()=>(
+            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+            ),
+
+            headerShadowVisible : false,
+        }} />
+
+
+        {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="auth/orderPage" options={{ 
+            headerTitle : '',
+            headerLeft : ()=>(
+                <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+                ),
+                
+                headerShadowVisible : false,
+        }} />
+
+        <Stack.Screen name="auth/resturantPage" options={{
+            headerTitle : '',
+            headerLeft : ()=>(
+            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+            ),
+            
+            headerShadowVisible : false,
+        }} />   
+      </Stack>
+    // </AuthProvider>
   );
 }

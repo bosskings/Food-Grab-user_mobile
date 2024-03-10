@@ -1,8 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Colors from '@/constants/Colors';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import DashHeader from '../../components/DashHeader';
+// import DashHeader from '../../components/DashHeader';
 import { Link } from 'expo-router'
 
 const index = () => {

@@ -7,7 +7,7 @@ import {Link, useNavigation} from 'expo-router'
 import { BASE_URL } from '../Endpoint/Enpoint';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native';
-import MyModal from './modal/MyModal';
+import MyModal from '../modal/MyModal';
 import { StatusBar } from 'expo-status-bar';
 
 
@@ -283,7 +283,7 @@ const register = () => {
 
             <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
                 Have an account? 
-                <Link href={'Onboard/login'}><Text style={{color : Colors.myRed}}>Login</Text></Link>
+                <Link href={''}><Text style={{color : Colors.myRed}}>Login</Text></Link>
             </Text>
         </ScrollView>
 
