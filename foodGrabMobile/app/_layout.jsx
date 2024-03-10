@@ -5,11 +5,13 @@ import {AuthContext, AuthProvider} from './context/AuthContext'
 import { useContext, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { ErrorBoundary } from 'expo-router';
+
 
 
 
 export const unstable_settings = {
-  initialRouteName: 'public/register',
+  initialRouteName: '',
 };
 
 export {
@@ -44,20 +46,24 @@ export default function RootLayout() {
     return null;
   }
 
+
   
-  return <RootLayoutNav />;
+  return (
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
+  )
 }
 
 const RootLayoutNav = () => {
   const navigate = useNavigation()
-  return (
+  const {userToken} = useContext(AuthContext)
 
-    <AuthProvider>
+  const publicScreens = (
       <Stack>
-        <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
         <Stack.Screen name="public/login" options={{ headerShown: false }} />
-        <Stack.Screen name="public/register" options={{ headerShown: false }} />
-
+        
+        <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeFour" options={{ headerShown: false }} />
@@ -79,10 +85,16 @@ const RootLayoutNav = () => {
             headerShadowVisible : false,
         }} />
 
+        <Stack.Screen name="public/register" options={{ headerShown: false }} />
+      </Stack>
+  )
+  
+  const authenticatedScreens = (
+
+      <Stack>
 
         {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
         <Stack.Screen name="auth/orderPage" options={{ 
             headerTitle : '',
             headerLeft : ()=>(
@@ -91,7 +103,6 @@ const RootLayoutNav = () => {
                 
                 headerShadowVisible : false,
         }} />
-
         <Stack.Screen name="auth/resturantPage" options={{
             headerTitle : '',
             headerLeft : ()=>(
@@ -100,7 +111,10 @@ const RootLayoutNav = () => {
             
             headerShadowVisible : false,
         }} />   
+
       </Stack>
-  </AuthProvider>
-  );
+  )
+
+
+  return userToken !== null ? authenticatedScreens : publicScreens;
 }

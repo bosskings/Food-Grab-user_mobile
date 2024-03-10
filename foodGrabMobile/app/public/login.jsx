@@ -14,7 +14,10 @@ import {AuthContext} from '../context/AuthContext'
 import { useContext } from 'react';
 const register = () => {
 
-    // const {login} = useContext(AuthContext);
+    const {loginFun} = useContext(AuthContext);
+    const {userToken} = useContext(AuthContext);
+
+    // alert(userToken)
 
 
     const [showActive, setShowActiveColor] = useState(false)
@@ -49,12 +52,12 @@ const register = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const handleLogin = async () => {
-        // setIsLoading(true);
+        setIsLoading(true);
         try {
             const response = await axios.post(`${BASE_URL}signin`, { email, password });
             const data = response.data;
     
-            if (data.status === 'SUCCESS......') {
+            if (data.status === 'SUCCESS') {
                 await AsyncStorage.setItem('data', JSON.stringify(data));
     
                 alert('Login successful');
@@ -62,7 +65,7 @@ const register = () => {
 
             } else {
                 alert('Login failed');
-                // setIsLoading(false);
+                setIsLoading(false);
             }
     
             console.log(data);
@@ -70,7 +73,7 @@ const register = () => {
         } catch (error) {
             alert(error);
             console.log(error);
-            // setIsLoading(false);
+            setIsLoading(false);
         }
     };
 
@@ -80,7 +83,7 @@ const register = () => {
   return (
     <SafeAreaView style={{flex : 1, backgroundColor : Colors.myRed}}>
       <View style={styles.container}>
-        <ScrollView >
+        <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={{fontFamily : 'Railway2', fontSize : 25}}>Login</Text>
             <Text style={{fontFamily : 'Railway1', fontSize : 15}}>Welcome back, login to place your order today</Text>
 
@@ -166,7 +169,7 @@ const register = () => {
                     </View>
             }
 
-            <TouchableOpacity style={styles.btnStyles}>
+            <TouchableOpacity style={styles.btnStyles} onPress={loginFun}>
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Signin'}</Text>
             </TouchableOpacity>
 
