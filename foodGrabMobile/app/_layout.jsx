@@ -4,6 +4,8 @@ import { Stack, useNavigation } from 'expo-router';
 import {AuthContext, AuthProvider} from './context/AuthContext'
 import { useContext, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 
 export const unstable_settings = {
@@ -47,6 +49,7 @@ export default function RootLayout() {
 }
 
 const RootLayoutNav = () => {
+  const navigate = useNavigation()
   return (
 
     // <AuthProvider>

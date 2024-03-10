@@ -205,7 +205,7 @@ const index = () => {
             <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 10}}>Available Restaurants</Text>
             <View>
 
-              <Link href={'resturantDetails/resturantPage'} asChild>
+              <Link href={'auth/resturantPage'} asChild>
                 <TouchableOpacity style={styles.restImageDiv}>
                   <Image source={require('../../assets/images/rest1.png')}
                     resizeMode='cover'
