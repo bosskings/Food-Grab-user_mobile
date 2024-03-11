@@ -281,7 +281,7 @@ const register = () => {
                 <Text style={{fontSize : 15, fontFamily : 'Railway2', color : 'white'}}>{isLoading ? (<ActivityIndicator color={'white'}/>) : 'Get Started'}</Text>
             </TouchableOpacity>
 
-            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 13, fontFamily : 'Railway3',}}>
+            <Text style={{textAlign : 'center', paddingTop : 10, fontSize : 15, fontFamily : 'Railway3',}}>
                 Have an account? 
                 <Link href={'public/login'}><Text style={{color : Colors.myRed}}>Login</Text></Link>
             </Text>

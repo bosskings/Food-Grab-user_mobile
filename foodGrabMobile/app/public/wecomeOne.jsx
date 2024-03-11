@@ -3,8 +3,11 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import Colors from '@/constants/Colors';
 import { Link } from 'expo-router';
-
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
 const wecomeOne = () => {
+
+  const {handleContinue} = useContext(AuthContext)
   return (
     <SafeAreaView style={{flex : 1, backgroundColor :'gray'}}>
       <View style={styles.container}>
@@ -21,11 +24,11 @@ const wecomeOne = () => {
         </View>
 
         
-        <Link href={'public/welcomeTwo'} asChild>        
-          <TouchableOpacity style={styles.btnStyles}>
+        {/* <Link href={'public/welcomeTwo'} asChild>         */}
+          <TouchableOpacity style={styles.btnStyles} onPress={handleContinue}>
               <Text style={{fontSize : 18, color : 'white', fontFamily : 'Railway2'}}>Grant Permission</Text>
-            </TouchableOpacity>
-        </Link>
+          </TouchableOpacity>
+        {/* </Link> */}
       </View>
     </SafeAreaView>
   )

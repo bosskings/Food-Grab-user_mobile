@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,  TouchableOpacity, TextInput, ScrollView } from
 import React, { useState } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Link } from 'expo-router';
+import { Link, useNavigation } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { BASE_URL } from '../Endpoint/Enpoint';
 import axios from 'axios';
@@ -17,6 +17,7 @@ const register = () => {
     const {loginFun} = useContext(AuthContext);
     const {userToken} = useContext(AuthContext);
 
+    const navigate = useNavigation()
     // alert(userToken)
 
 
@@ -63,6 +64,7 @@ const register = () => {
     
                 alert('Login successful');
                 setIsLoading(false);
+                navigate.navigate('(tabs)')
 
             } else {
                 alert('Login failed');

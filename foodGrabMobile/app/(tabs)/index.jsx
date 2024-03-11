@@ -11,7 +11,7 @@ import { StatusBar } from 'expo-status-bar';
 import { AuthContext } from '../context/AuthContext';
 
 const index = () => {
-  const {logoutFun} = useContext(AuthContext)
+  const {logout} = useContext(AuthContext)
 
   const [show, setShow] = useState(false);
 
@@ -36,9 +36,9 @@ const index = () => {
           <Ionicons name='filter' size={15} style={{position : 'absolute', top : 35, right :15}}/>
         </View>
 
-        {/* <TouchableOpacity onPress={logoutFun}>
+        <TouchableOpacity onPress={logout}>
           <Text>Logout</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         <View>
             <View style={{paddingVertical : 0, paddingBottom : 0, }}>

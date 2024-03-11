@@ -10,9 +10,9 @@ import { ErrorBoundary } from 'expo-router';
 
 
 
-export const unstable_settings = {
-  initialRouteName: '(tabs)',
-};
+// export const unstable_settings = {
+//   initialRouteName: 'public/wecomeOne',
+// };
 
 export {
   ErrorBoundary,
@@ -58,14 +58,13 @@ export default function RootLayout() {
 const RootLayoutNav = () => {
   const navigate = useNavigation()
   const {userToken} = useContext(AuthContext)
+  const {isLoggedIn} = useContext(AuthContext)
 
+
+  if (!isLoggedIn) return null;
   return (
-    <>
-
-      {userToken === null ? 
       <Stack>
-        <Stack.Screen name="public/login" options={{ headerShown: false }} />
-        
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
         <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
@@ -89,13 +88,9 @@ const RootLayoutNav = () => {
         }} />
 
         <Stack.Screen name="public/register" options={{ headerShown: false }} />
-      </Stack>
+        <Stack.Screen name="public/login" options={{ headerShown: false }} />
 
-      :
-
-      <Stack>
         {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="auth/orderPage" options={{ 
             headerTitle : '',
             headerLeft : ()=>(
@@ -111,10 +106,7 @@ const RootLayoutNav = () => {
             ),
             
             headerShadowVisible : false,
-        }} />   
-
+        }} /> 
       </Stack>
-    }
-    </>
   )
 }
