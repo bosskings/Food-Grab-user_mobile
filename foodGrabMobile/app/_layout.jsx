@@ -6,12 +6,15 @@ import { useContext, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ErrorBoundary } from 'expo-router';
+import { ActivityIndicator } from 'react-native';
+import { View } from './components/Themed';
+
 
 
 
 
 // export const unstable_settings = {
-//   initialRouteName: 'public/wecomeOne',
+//   initialRouteName: '(tabs)',
 // };
 
 export {
@@ -56,57 +59,58 @@ export default function RootLayout() {
 }
 
 const RootLayoutNav = () => {
-  const navigate = useNavigation()
-  const {userToken} = useContext(AuthContext)
-  const {isLoggedIn} = useContext(AuthContext)
+  const navigate = useNavigation();
+  const { userToken, isLoggedIn } = useContext(AuthContext);
 
+  // alert(userToken)
 
-  if (!isLoggedIn) return null;
   return (
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
-        <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
-        <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
-        <Stack.Screen name="public/welcomeFour" options={{ headerShown: false }} />
-        <Stack.Screen name="public/OTPVerifcation" options={{
-            headerTitle : '',
-            headerLeft : ()=>(
-            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-            ),
 
-            headerShadowVisible : false,
-        }} />
-        <Stack.Screen name="public/successfull" options={{ headerShown: false }} />
-        <Stack.Screen name="public/address" options={{ 
-            headerTitle : '',
-            headerLeft : ()=>(
-            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-            ),
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
+          <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
+          <Stack.Screen name="public/welcomeFour" options={{ headerShown: false }} />
+          <Stack.Screen name="public/OTPVerifcation" options={{
+              headerTitle : '',
+              headerLeft : ()=>(
+              <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+              ),
 
-            headerShadowVisible : false,
-        }} />
+              headerShadowVisible : false,
+          }} />
+          <Stack.Screen name="public/successfull" options={{ headerShown: false }} />
+          <Stack.Screen name="public/address" options={{ 
+              headerTitle : '',
+              headerLeft : ()=>(
+              <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+              ),
 
-        <Stack.Screen name="public/register" options={{ headerShown: false }} />
-        <Stack.Screen name="public/login" options={{ headerShown: false }} />
+              headerShadowVisible : false,
+          }} />
 
-        {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
-        <Stack.Screen name="auth/orderPage" options={{ 
-            headerTitle : '',
-            headerLeft : ()=>(
-                <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-                ),
-                
-                headerShadowVisible : false,
-        }} />
-        <Stack.Screen name="auth/resturantPage" options={{
-            headerTitle : '',
-            headerLeft : ()=>(
-            <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-            ),
-            
-            headerShadowVisible : false,
-        }} /> 
-      </Stack>
+          {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="auth/orderPage" options={{ 
+              headerTitle : '',
+              headerLeft : ()=>(
+                  <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+                  ),
+                  
+                  headerShadowVisible : false,
+          }} />
+          <Stack.Screen name="auth/resturantPage" options={{
+              headerTitle : '',
+              headerLeft : ()=>(
+              <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+              ),
+              
+              headerShadowVisible : false,
+          }} /> 
+
+          <Stack.Screen name="public/register" options={{ headerShown: false }} />
+          <Stack.Screen name="public/login" options={{ headerShown: false }} />
+          <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
+
+        </Stack>
   )
 }

@@ -12,6 +12,8 @@ import { AuthContext } from '../context/AuthContext';
 
 const index = () => {
   const {logout} = useContext(AuthContext)
+  const {isLoading} = useContext(AuthContext)
+  
 
   const [show, setShow] = useState(false);
 
@@ -22,6 +24,7 @@ const index = () => {
   const hideAndShowTwo = () =>{
     setShow(true);
   }
+
 
 
   

@@ -1,27 +1,31 @@
-import React, { createContext, useState, useEffect } from 'react';
-// import { useNavigation } from 'expo-router';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native'
+import React, { createContext, useState, useEffect } from 'react'
+import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export const AuthContext = createContext();
 
+// ... (your imports)
+
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigation();
   const [userToken, setUserToken] = useState(null);
   const [hasSeenWelcomeScreen, setHasSeenWelcomeScreen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const isLoggedIn = async () => {
     try {
-      let storedToken = await AsyncStorage.getItem('token');
-      setUserToken(storedToken);
+      let userToken = await AsyncStorage.getItem('token');
+      setUserToken(userToken);
+      setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
 
   const handleContinue = async () => {
     await AsyncStorage.setItem('hasSeenWelcomeScreen', 'true');
-    navigate.navigate('public/welcomeTwo');
+    router.push('public/welcomeTwo');
   };
 
   const checkWelcomeStatus = async () => {
@@ -29,34 +33,38 @@ export const AuthProvider = ({ children }) => {
     setHasSeenWelcomeScreen(storedValue === 'true');
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const checkLoginStatus = async () => {
       await isLoggedIn();
       await checkWelcomeStatus();
-
-      if (userToken !== null && hasSeenWelcomeScreen === true) {
-        navigate.navigate('(tabs)'); // Replace '(tabs)' with the actual route name
-      } else if (userToken === null && hasSeenWelcomeScreen === false) {
-        navigate.navigate('public/wecomeOne');
-      } else if (userToken === null && hasSeenWelcomeScreen === true) {
-        navigate.navigate('public/login');
+  
+      if (userToken && hasSeenWelcomeScreen) {
+        router.replace('(tabs)');
+        setIsLoading(false);
+      } else if (!userToken && !hasSeenWelcomeScreen) {
+        router.replace('public/wecomeOne');
+        setIsLoading(false);
+      } else if (!userToken && hasSeenWelcomeScreen) {
+        router.replace('public/login');
+        setIsLoading(false);
       }
+  
     };
-
+  
     checkLoginStatus();
-  }, [userToken, hasSeenWelcomeScreen, navigate]);
+  }, [userToken, hasSeenWelcomeScreen]);
 
   const logout = () => {
     setUserToken(null);
     AsyncStorage.removeItem('token');
-    navigate.navigate('public/wecomeOne');
+    router.replace('public/welcomeOne');
   };
 
   return (
-    <AuthContext.Provider value={{ userToken, logout, isLoggedIn, handleContinue }}>
+    <AuthContext.Provider value={{ userToken, logout, isLoggedIn, handleContinue, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthProvider;
+const styles = StyleSheet.create({});
