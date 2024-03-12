@@ -33,20 +33,19 @@ export const AuthProvider = ({ children }) => {
     setHasSeenWelcomeScreen(storedValue === 'true');
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const checkLoginStatus = async () => {
       await isLoggedIn();
       await checkWelcomeStatus();
   
-      if (userToken && hasSeenWelcomeScreen) {
+      if (userToken !== null && hasSeenWelcomeScreen) {
         router.replace('(tabs)');
-        setIsLoading(false);
-      } else if (!userToken && !hasSeenWelcomeScreen) {
-        router.replace('public/wecomeOne');
-        setIsLoading(false);
-      } else if (!userToken && hasSeenWelcomeScreen) {
+
+      // } else if (!userToken && !hasSeenWelcomeScreen) {
+      //   router.replace('public/wecomeOne');
+      
+      } if (userToken === null && hasSeenWelcomeScreen) {
         router.replace('public/login');
-        setIsLoading(false);
       }
   
     };

@@ -41,6 +41,9 @@ const index = () => {
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
+            <TouchableOpacity onPress={logout}>
+              <Text>Logout</Text>
+            </TouchableOpacity>
               <View style={{paddingVertical : 0, paddingBottom : 0, }}>
                 <Image source={require('../../assets/images/dashSec2.png')}
                   style={styles.imageDIv}

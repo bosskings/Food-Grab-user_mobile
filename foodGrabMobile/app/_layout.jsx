@@ -68,6 +68,27 @@ const RootLayoutNav = () => {
 
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
+          <Stack.Screen name="auth/orderPage" options={{ 
+              headerTitle : '',
+              headerLeft : ()=>(
+                  <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+                  ),
+                  
+                  headerShadowVisible : false,
+          }} />
+          <Stack.Screen name="auth/resturantPage" options={{
+              headerTitle : '',
+              headerLeft : ()=>(
+              <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+              ),
+              
+              headerShadowVisible : false,
+          }} /> 
+
+          <Stack.Screen name="public/login" options={{ headerShown: false }} />
+          <Stack.Screen name="public/register" options={{ headerShown: false }} />
+          <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
           <Stack.Screen name="public/welcomeTwo" options={{ headerShown: false }} />
           <Stack.Screen name="public/welcomeThree" options={{ headerShown: false }} />
           <Stack.Screen name="public/welcomeFour" options={{ headerShown: false }} />
@@ -89,27 +110,6 @@ const RootLayoutNav = () => {
               headerShadowVisible : false,
           }} />
 
-          {/* <Stack.Screen name="homeDash" options={{ headerShown: false }} /> */}
-          <Stack.Screen name="auth/orderPage" options={{ 
-              headerTitle : '',
-              headerLeft : ()=>(
-                  <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-                  ),
-                  
-                  headerShadowVisible : false,
-          }} />
-          <Stack.Screen name="auth/resturantPage" options={{
-              headerTitle : '',
-              headerLeft : ()=>(
-              <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
-              ),
-              
-              headerShadowVisible : false,
-          }} /> 
-
-          <Stack.Screen name="public/register" options={{ headerShown: false }} />
-          <Stack.Screen name="public/login" options={{ headerShown: false }} />
-          <Stack.Screen name="public/wecomeOne" options={{ headerShown: false }} />
 
         </Stack>
   )
