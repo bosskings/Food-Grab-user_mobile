@@ -39,7 +39,8 @@ export const AuthProvider = ({ children }) => {
       await checkWelcomeStatus();
   
       if (userToken !== null && hasSeenWelcomeScreen) {
-        router.replace('(tabs)');
+        // router.replace('(tabs)');
+        router.replace('auth/proceed_checkout');
 
       // } else if (!userToken && !hasSeenWelcomeScreen) {
       //   router.replace('public/wecomeOne');
@@ -48,8 +49,8 @@ export const AuthProvider = ({ children }) => {
         router.replace('public/login');
       }
   
-    };
-  
+      };
+    
     checkLoginStatus();
   }, [userToken, hasSeenWelcomeScreen]);
 

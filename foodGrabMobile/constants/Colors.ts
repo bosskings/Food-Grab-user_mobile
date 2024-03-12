@@ -23,6 +23,6 @@ export default {
   myLightGray : '#EDEDED',
   myLightGreen : '#70AA67',
   btnGreen : '#54804D',
-
+  lighterGreen : '#EEFFEB'
 
 };

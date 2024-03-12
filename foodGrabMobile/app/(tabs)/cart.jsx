@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Link } from 'expo-router'
 
 const cart = () => {
 
@@ -56,11 +57,16 @@ const cart = () => {
             </View>
 
             <View style={styles.checkOutDiv}>
-              <TouchableOpacity style={styles.checkOutBtn}>
-                <Text style={{fontFamily : 'Railway2', color : 'white'}}>Checkout</Text>
-              </TouchableOpacity>
+            
+
+                <Link href={"auth/proceed_checkout"} asChild>
+                    <TouchableOpacity style={styles.checkOutBtn}>
+                    <Text style={{fontFamily : 'Railway2', color : 'white'}}>Checkout</Text>
+                    </TouchableOpacity>
+                </Link>
+
               <Text style={{fontFamily : 'Railway2'}}>View Selection</Text>
-              <Ionicons name='trash-outline' size={15} color={Colors.myRed}/>
+              <FontAwesome name='trash' size={15} color={Colors.myRed}/>
             </View>
           </View>
 
@@ -92,7 +98,7 @@ const cart = () => {
                 <Text style={{fontFamily : 'Railway2', color : 'white'}}>Checkout</Text>
               </TouchableOpacity>
               <Text style={{fontFamily : 'Railway2'}}>View Selection</Text>
-              <Ionicons name='trash-outline' size={15} color={Colors.myRed}/>
+              <FontAwesome name='trash' size={15} color={Colors.myRed}/>
             </View>
           </View>
 
@@ -125,7 +131,7 @@ const cart = () => {
                 <Text style={{fontFamily : 'Railway2', color : 'white'}}>Checkout</Text>
               </TouchableOpacity>
               <Text style={{fontFamily : 'Railway2'}}>View Selection</Text>
-              <Ionicons name='trash-outline' size={15} color={Colors.myRed}/>
+              <FontAwesome name='trash' size={15} color={Colors.myRed}/>
             </View>
           </View>
 
@@ -158,7 +164,7 @@ const cart = () => {
                 <Text style={{fontFamily : 'Railway2', color : 'white'}}>Checkout</Text>
               </TouchableOpacity>
               <Text style={{fontFamily : 'Railway2'}}>View Selection</Text>
-              <Ionicons name='trash-outline' size={15} color={Colors.myRed}/>
+              <FontAwesome name='trash' size={15} color={Colors.myRed}/>
             </View>
           </View>
 
