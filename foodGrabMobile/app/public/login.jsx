@@ -237,7 +237,8 @@ const styles = StyleSheet.create({
         borderWidth : 1,
         borderRadius : 5,
         fontSize : 15,
-        position : 'relative'
+        position : 'relative',
+        fontFamily :'Railway1'
     },
 
     btnStyles :{
