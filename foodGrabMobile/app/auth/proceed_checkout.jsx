@@ -4,11 +4,16 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Colors from '@/constants/Colors';
+import { Link } from 'expo-router'
+import { useNavigation } from 'expo-router';
+
 
 const proceed_checkout = () => {
+
+    const navigate = useNavigation()
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={{flex : 1, position : 'relative'}}>
+    <View style={styles.container} showsVerticalScrollIndicator={false}>
+      <View>
 
         <View style={styles.viewSelction}>
             <Text style={{fontSize : 17, fontFamily : 'Railway2'}}>View Selection</Text>
@@ -88,20 +93,21 @@ const proceed_checkout = () => {
                 </TouchableOpacity>
             </View>
         </View>
-
       </View>
 
+      <View style={styles.bottomBtns} >
 
-      <View style={styles.bottomBtns}>
-        <TouchableOpacity>
-            <Text>Proceed to Checkout</Text>
-        </TouchableOpacity>
+            <Link href={'auth/order_summary'} asChild> 
+                <TouchableOpacity style={styles.eachBottomBtn}>
+                    <Text style={{fontFamily : 'Railway2', fontSize : 15, color : 'white'}}>Proceed to Checkout</Text>
+                </TouchableOpacity>
+            </Link>
 
-        <TouchableOpacity>
-            <Text>Cancel Order</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+            <TouchableOpacity style={styles.eachBottomBtn2} onPress={navigate.goBack}>
+                <Text style={{fontFamily : 'Railway2', fontSize : 15, color : Colors.myRed}}>Cancel Order</Text>
+            </TouchableOpacity>
+        </View>
+    </View>
   )
 }
 
@@ -109,11 +115,11 @@ export default proceed_checkout
 
 const styles = StyleSheet.create({
     container : {
-      flex : 1,
-      backgroundColor : 'red',
-      padding : 20,
-      paddingTop : 0,
-      position : 'relative',
+        flex : 1,
+        position : 'relative',
+        backgroundColor : 'white',
+        padding : 20,
+        paddingTop : 0,
     },
 
     viewSelction : {
@@ -124,7 +130,6 @@ const styles = StyleSheet.create({
     },
 
     cartDiv : {
-        flex : 1,
         display : 'flex',
         flexDirection : 'row',
         justifyContent : 'space-between',
@@ -163,10 +168,45 @@ const styles = StyleSheet.create({
         borderStyle : 'dashed'
     },
 
-    bottomBtns : {
+    bottomBtns: {
         position : 'absolute',
-        bottom : 0,
+        bottom : 40,
+        width : '100%',
+        display : 'flex',
+        margin : 'auto',
+        flexDirection : 'column',
+        alignItems : 'center',
+        justifyContent : 'center',
+        alignSelf : 'center',
+    },
+
+
+    eachBottomBtn : {
+        width : '100%',
+        left : 0,
         right : 0,
+        padding : 15,
+        alignItems : 'center',
+        backgroundColor : Colors.myRed, 
+        marginBottom : 15, 
+        borderRadius : 5,
+
+    },
+
+    eachBottomBtn2 : {
+        width : '100%',
+        left : 0,
+        right : 0,
+        padding : 15,
+        alignItems : 'center',
+        borderColor : Colors.myRed, 
+        borderWidth : 1,
+        marginBottom : 15, 
+        borderRadius : 5,
+        
     }
+
+
+
 
 })

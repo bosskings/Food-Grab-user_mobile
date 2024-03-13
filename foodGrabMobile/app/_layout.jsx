@@ -2,7 +2,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import { Stack, useNavigation } from 'expo-router';
 import {AuthContext, AuthProvider} from './context/AuthContext'
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ErrorBoundary } from 'expo-router';
@@ -35,12 +35,28 @@ export default function RootLayout() {
   });
 
 
+  
+  const [userToken, setUserToken] = useState(null);
+  const [hasSeenWelcomeScreen, setHasSeenWelcomeScreen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const isLoggedIn = async () => {
+    try {
+      let userToken = await AsyncStorage.getItem('token');
+      setUserToken(userToken);
+      setIsLoading(false);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+
   useEffect(() => {
     if (error) throw error;
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && userToken !== null) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
@@ -60,9 +76,8 @@ export default function RootLayout() {
 
 const RootLayoutNav = () => {
   const navigate = useNavigation();
-  const { userToken, isLoggedIn } = useContext(AuthContext);
+  const { userToken, isLoggedIn, isLoading } = useContext(AuthContext);
 
-  // alert(userToken)
 
   return (
 
@@ -89,6 +104,15 @@ const RootLayoutNav = () => {
           }} /> 
 
           <Stack.Screen name="auth/proceed_checkout" options={{
+              headerTitle : '',
+              headerLeft : ()=>(
+              <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
+              ),
+              
+              headerShadowVisible : false,
+          }} /> 
+
+          <Stack.Screen name="auth/order_summary" options={{
               headerTitle : '',
               headerLeft : ()=>(
               <Ionicons name='arrow-back' size={25} onPress={navigate.goBack}/>
