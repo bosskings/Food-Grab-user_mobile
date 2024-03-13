@@ -131,6 +131,8 @@ const RootLayoutNav = () => {
               headerShadowVisible : false,
           }} /> 
 
+          <Stack.Screen name="auth/order_status" options={{headerShown : false}} /> 
+
 
 
 

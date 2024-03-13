@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
         // router.replace('auth/proceed_checkout');
         // router.replace('auth/order_summary');
         // router.replace('auth/prefered_payment');
+        // router.replace('auth/order_status');
         
 
       // } else if (!userToken && !hasSeenWelcomeScreen) {
