@@ -172,12 +172,6 @@ const order_summary = () => {
 export default order_summary
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
-  container: {
-    flex: 1,
-    backgroundColor: 'white'
-  }
-=======
   container : {
     flex : 1,
     backgroundColor : 'white',
@@ -313,5 +307,4 @@ eachBottomBtn2 : {
     marginTop : 10,
     borderRadius : 5,
 }
->>>>>>> 6ef06683a7f2d95dcda090aa577611260918557f
 })
