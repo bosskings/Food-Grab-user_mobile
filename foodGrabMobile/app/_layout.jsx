@@ -134,6 +134,20 @@ const RootLayoutNav = () => {
       }} />
 
 
+      <Stack.Screen name="auth/prefered_payment" options={{
+        headerTitle: '',
+        headerLeft: () => (
+          <Ionicons name='arrow-back' size={25} onPress={navigate.goBack} />
+        ),
+
+        headerShadowVisible: false,
+      }} />
+
+      <Stack.Screen name="auth/order_status" options={{ headerShown: false }} />
+
+
+
+
       {/* =========== PUBLIC SCREENS ======================= */}
       <Stack.Screen name="public/login" options={{ headerShown: false }} />
       <Stack.Screen name="public/register" options={{ headerShown: false }} />
