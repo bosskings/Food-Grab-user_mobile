@@ -29,7 +29,7 @@ const orderDetails = () => {
                 return;
             }
             setCurrentStage(stages[currentIndex]);
-        }, 5000);
+        }, 2000);
 
         return () => clearInterval(interval);
     }, [order]);
@@ -100,7 +100,7 @@ const orderDetails = () => {
 
                 {currentStage === "DELIVERD" && (
                     <View style={{ width: "100%" }}>
-                        <Link href={""} asChild>
+                        <Link href={"auth/orderRating"} asChild>
                             <TouchableOpacity style={styles.rateBtn}>
                                 <Text style={{ color: "#fff", fontFamily: "Railway3" }}>Rate your order</Text>
                             </TouchableOpacity>

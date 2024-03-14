@@ -145,6 +145,12 @@ const RootLayoutNav = () => {
 
       <Stack.Screen name="auth/order_status" options={{ headerShown: false }} />
 
+      <Stack.Screen name='auth/orderRating' options={{
+        headerTitle: '', headerShadowVisible: false, headerLeft: () => (
+          ""
+        ),
+      }} />
+
 
 
 
