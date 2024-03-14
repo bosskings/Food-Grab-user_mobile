@@ -18,8 +18,8 @@ const order_summary = () => {
 export default order_summary
 
 const styles = StyleSheet.create({
-  container : {
-    flex : 1,
-    backgroundColor : 'white'
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
   }
 })
