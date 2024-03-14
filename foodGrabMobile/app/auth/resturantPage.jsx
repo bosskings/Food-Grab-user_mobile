@@ -6,12 +6,20 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const resturantPage = () => {
+const resturantPage = ({ route }) => {
+
+
+    const { productID } = route?.params ?? {};
+
+
+    console.log(productID); 
+
+
   return (
     <View style={styles.container}>
         <View>
             <View style={{display : 'flex', flexDirection : 'row', paddingBottom : 10}}>
-                <Text style={{ fontFamily : 'Railway2', fontSize : 17, }}>Kilimanjaro - Big Tree</Text>
+                <Text style={{ fontFamily : 'Railway2', fontSize : 17, }}>Jude</Text>
                 <Text style={{marginLeft : 'auto', fontFamily : 'Railway1'}}>Open till 06:300 pm</Text>
             </View>
             <Image source={require('../../assets/images/rest1.png')}

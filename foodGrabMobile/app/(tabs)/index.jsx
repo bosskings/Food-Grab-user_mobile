@@ -1,20 +1,23 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView, ActivityIndicator } from 'react-native'
+import React, { useContext, useState, useEffect } from 'react'
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import DashHeader from '../components/DashHeader'
-import { Link } from 'expo-router'
+import { Link, useNavigation } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar';
 import { AuthContext } from '../context/AuthContext';
+import { BASE_URL } from '../Endpoint/Enpoint';
 
-const index = () => {
+const index = ({ productID }) => {
   const {logout} = useContext(AuthContext)
-  const {isLoading} = useContext(AuthContext)
-  
-
+  const {userToken} = useContext(AuthContext)
   const [show, setShow] = useState(false);
+
+  const navigate = useNavigation()
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const hideAndShowOne = () =>{
     setShow(false);
@@ -24,7 +27,35 @@ const index = () => {
     setShow(true);
   }
 
+  const [shopData, setShopData] = useState([])
 
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    try {
+      const res = await fetch(`${BASE_URL}shops`, {
+        method: 'GET',
+        headers: {
+          "Authorization": `Bearer ${userToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const myData = await res.json();
+      setIsLoading(true);
+      setShopData(myData.data);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [userToken]);
+
+
+  console.log(shopData)
+  console.log(userToken)
 
   
   return (
@@ -211,71 +242,35 @@ const index = () => {
               <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 10}}>Available Restaurants</Text>
               <View>
 
-                <Link href={'auth/resturantPage'} asChild>
-                  <TouchableOpacity style={styles.restImageDiv}>
-                    <Image source={require('../../assets/images/rest1.png')}
-                      resizeMode='cover'
-                      style={styles.restImage}
-                    />
+                  {shopData === null || shopData === undefined ? <ActivityIndicator style={{paddingTop : 50}} color={Colors.myRed} size={'small'}/> : (
 
-                    <View style={{paddingHorizontal : 10, paddingVertical : 10}}>
-                      <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', }}>
-                        <Text style={{fontFamily : 'Railway3'}}>Kilimajaro - Big Tree</Text>
-                        <Text style={{marginLeft : 'auto', fontFamily : 'Railway2'}}>5.0 (123)</Text>
-                      </View>
-
-                      <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', paddingTop : 10}}>
-                          <Text style={{fontFamily : 'Railway1'}}>From N1000 | 5 - 10 mins</Text>
-                          <TouchableOpacity style={{marginLeft : 'auto',}}>
-                            <FontAwesome name='heart-o' color={Colors.btnGreen}  size={15}/>
-                          </TouchableOpacity>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </Link>
-
-                <TouchableOpacity style={styles.restImageDiv}>
-                  <Image source={require('../../assets/images/rest2.png')}
-                    resizeMode='cover'
-                    style={styles.restImage}
-                  />
-
-                  <View style={{paddingHorizontal : 10, paddingVertical : 10}}>
-                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', }}>
-                      <Text style={{fontFamily : 'Railway3'}}>Kilimajaro - Big Tree</Text>
-                      <Text style={{marginLeft : 'auto', fontFamily : 'Railway2'}}>5.0 (123)</Text>
-                    </View>
-
-                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', paddingTop : 10}}>
-                        <Text style={{fontFamily : 'Railway1'}}>From N1000 | 5 - 10 mins</Text>
-                        <TouchableOpacity style={{marginLeft : 'auto',}}>
-                          <FontAwesome name='heart-o' color={Colors.btnGreen}  size={15}/>
-                        </TouchableOpacity>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+                    <>
+                      {shopData.map((item, index) => (
+                      <TouchableOpacity style={styles.restImageDiv} key={index} onPress={() => navigate.navigate('auth/resturantPage', {productID: item._id})}>
+                        <Image source={require('../../assets/images/rest1.png')}
+                          resizeMode='cover'
+                          style={styles.restImage}
+                        />
+  
+                        <View style={{paddingHorizontal : 10, paddingVertical : 10}}>
+                          <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', }}>
+                            <Text style={{fontFamily : 'Railway3'}}>{item.shopName}</Text>
+                            <Text style={{marginLeft : 'auto', fontFamily : 'Railway2'}}>5.0 (123)</Text>
+                          </View>
+  
+                          <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', paddingTop : 10}}>
+                              <Text style={{fontFamily : 'Railway1'}}>From N1000 | 5 - 10 mins</Text>
+                              <TouchableOpacity style={{marginLeft : 'auto',}}>
+                                <FontAwesome name='heart-o' color={Colors.btnGreen}  size={15}/>
+                              </TouchableOpacity>
+                          </View>
+                        </View>
+                      </TouchableOpacity>
+                    ))}
+                    </>
+                  )}
 
 
-                <TouchableOpacity style={styles.restImageDiv}>
-                  <Image source={require('../../assets/images/rest1.png')}
-                    resizeMode='cover'
-                    style={styles.restImage}
-                  />
-
-                  <View style={{paddingHorizontal : 10, paddingVertical : 10}}>
-                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', }}>
-                      <Text style={{fontFamily : 'Railway3'}}>Kilimajaro - Big Tree</Text>
-                      <Text style={{marginLeft : 'auto', fontFamily : 'Railway2'}}>5.0 (123)</Text>
-                    </View>
-
-                    <View style={{display : 'flex', flexDirection : 'row', alignItems : 'center', paddingTop : 10}}>
-                        <Text style={{fontFamily : 'Railway1'}}>From N1000 | 5 - 10 mins</Text>
-                        <TouchableOpacity style={{marginLeft : 'auto',}}>
-                          <FontAwesome name='heart-o' color={Colors.btnGreen}  size={15}/>
-                        </TouchableOpacity>
-                    </View>
-                  </View>
-                </TouchableOpacity>
               </View>
             </View>
           }

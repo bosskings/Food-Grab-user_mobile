@@ -14,13 +14,16 @@ export const AuthProvider = ({ children }) => {
 
   const isLoggedIn = async () => {
     try {
-      let userToken = await AsyncStorage.getItem('token');
+      let userToken = (await AsyncStorage.getItem('token') ? JSON.parse(await AsyncStorage.getItem('token')) : null);
       setUserToken(userToken);
       setIsLoading(false);
     } catch (error) {
       alert(error);
     }
   };
+
+  
+
 
   const handleContinue = async () => {
     await AsyncStorage.setItem('hasSeenWelcomeScreen', 'true');
