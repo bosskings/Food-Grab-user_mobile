@@ -2,8 +2,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React, { createContext, useState, useEffect } from 'react'
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from 'expo-router';
-
+import { Redirect } from 'expo-router';
 
 export const AuthContext = createContext();
 
@@ -21,8 +20,9 @@ export const AuthProvider = ({ children }) => {
       alert(error);
     }
   };
-
   
+  alert(userToken)
+
 
 
   const handleContinue = async () => {
@@ -35,39 +35,20 @@ export const AuthProvider = ({ children }) => {
     setHasSeenWelcomeScreen(storedValue === 'true');
   };
 
-  React.useEffect(() => {
-    const checkLoginStatus = async () => {
-      await isLoggedIn();
-      await checkWelcomeStatus();
-  
-      if (userToken !== null && hasSeenWelcomeScreen) {
-        router.replace('(tabs)')
-        // router.replace('auth/proceed_checkout');
-        // router.replace('auth/order_summary');
-        // router.replace('auth/prefered_payment');
-        // router.replace('auth/order_status');
-        
-
-      // } else if (!userToken && !hasSeenWelcomeScreen) {
-      //   router.replace('public/wecomeOne');
-      
-      } if (userToken === null && hasSeenWelcomeScreen) {
-        router.replace('public/login');
-      }
-
-      else{
-        setIsLoading(true)
-      }
-  
-      };
-    
-    checkLoginStatus();
-  }, [userToken, hasSeenWelcomeScreen]);
+  useEffect(() => {
+    if (userToken !== null ) {
+      router.replace('(tabs)');
+    } else if (userToken === null) {
+      router.replace('public/login');
+    } else {
+      setIsLoading(true);
+    }
+  }, [userToken]);
 
   const logout = () => {
     setUserToken(null);
     AsyncStorage.removeItem('token');
-    router.replace('public/welcomeOne');
+    router.replace('public/login');
   };
 
   return (
@@ -77,4 +58,3 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-const styles = StyleSheet.create({});

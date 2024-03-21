@@ -1,13 +1,13 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useFonts } from 'expo-font';
+import { isLoading, useFonts } from 'expo-font';
 import { Stack, useNavigation } from 'expo-router';
 import {AuthContext, AuthProvider} from './context/AuthContext'
 import { useContext, useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ErrorBoundary } from 'expo-router';
-import { ActivityIndicator } from 'react-native';
-import { View } from './components/Themed';
+import { Text, ActivityIndicator } from 'react-native'
+
 
 
 
@@ -35,28 +35,12 @@ export default function RootLayout() {
   });
 
 
-  
-  const [userToken, setUserToken] = useState(null);
-  const [hasSeenWelcomeScreen, setHasSeenWelcomeScreen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const isLoggedIn = async () => {
-    try {
-      let userToken = await AsyncStorage.getItem('token');
-      setUserToken(userToken);
-      setIsLoading(false);
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-
   useEffect(() => {
     if (error) throw error;
   }, [error]);
 
   useEffect(() => {
-    if (loaded && userToken !== null) {
+    if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
@@ -64,20 +48,21 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
-
   
   return (
     <AuthProvider>
       <RootLayoutNav />
     </AuthProvider>
-  )
+  );
+
 }
 
 const RootLayoutNav = () => {
-  const navigate = useNavigation();
-  const { userToken, isLoggedIn, isLoading } = useContext(AuthContext);
+  const {isLoading} = useContext(AuthContext)
 
+  {isLoading && <ActivityIndicator size={'large'}/>}
+  
+  const navigate = useNavigation()
 
   return (
 

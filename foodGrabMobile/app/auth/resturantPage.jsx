@@ -1,25 +1,65 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Colors from '@/constants/Colors';
 import { Link } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { AuthContext } from '../context/AuthContext';
+import { BASE_URL } from '../Endpoint/Enpoint';
+import { useRoute } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context'
+const resturantPage = () => {
 
-const resturantPage = ({ route }) => {
-
-
-    const { productID } = route?.params ?? {};
+    const route = useRoute();
+    const { shopId } = route.params;
 
 
-    console.log(productID); 
+    const [singleShopData, setSingleShopData] = useState({})
+    const {userToken} = useContext(AuthContext)
+
+    const [isLoading, setIsLoading] = useState(false)
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    try {
+      const res = await fetch(`${BASE_URL}singleShop/${shopId}`, {
+        method: 'GET',
+        headers: {
+          "Authorization": `Bearer ${userToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const myData = await res.json();
+      setIsLoading(false);
+
+    //   setIsLoading(true);
+      setSingleShopData(myData.data);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [userToken]);
+
+
+
+
+  console.log(singleShopData.cuisines)
+
+
 
 
   return (
     <View style={styles.container}>
+
+        {isLoading && <ActivityIndicator size={'large'} style={{flex : 1, justifyContent : 'center', alignItems : 'center'}}/>}
+
         <View>
             <View style={{display : 'flex', flexDirection : 'row', paddingBottom : 10}}>
-                <Text style={{ fontFamily : 'Railway2', fontSize : 17, }}>Jude</Text>
+                <Text style={{ fontFamily : 'Railway2', fontSize : 17, }}>{singleShopData.shopName}</Text>
                 <Text style={{marginLeft : 'auto', fontFamily : 'Railway1'}}>Open till 06:300 pm</Text>
             </View>
             <Image source={require('../../assets/images/rest1.png')}

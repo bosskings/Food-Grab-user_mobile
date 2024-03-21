@@ -10,7 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import { AuthContext } from '../context/AuthContext';
 import { BASE_URL } from '../Endpoint/Enpoint';
 
-const index = ({ productID }) => {
+const index = () => {
   const {logout} = useContext(AuthContext)
   const {userToken} = useContext(AuthContext)
   const [show, setShow] = useState(false);
@@ -28,7 +28,6 @@ const index = ({ productID }) => {
   }
 
   const [shopData, setShopData] = useState([])
-
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -54,8 +53,10 @@ const index = ({ productID }) => {
   }, [userToken]);
 
 
-  console.log(shopData)
-  console.log(userToken)
+  const handleProductPress = (shopId) => {
+    navigate.navigate('auth/resturantPage', { shopId })
+  };
+
 
   
   return (
@@ -239,14 +240,14 @@ const index = ({ productID }) => {
             </View> :
                         
             <View style={{paddingTop : 20, }} showsVerticalScrollIndicator={false}>
-              <Text style={{fontFamily : 'Railway2', fontSize : 17, paddingBottom : 10}}>Available Restaurants</Text>
+              <Text style={{fontFamily : 'Railway3', fontSize : 15, paddingBottom : 10}}>Available Restaurants</Text>
               <View>
 
-                  {shopData === null || shopData === undefined ? <ActivityIndicator style={{paddingTop : 50}} color={Colors.myRed} size={'small'}/> : (
+                  {shopData === null || shopData === undefined ? <ActivityIndicator style={{paddingTop : 100}} size={'small'}/> : (
 
                     <>
                       {shopData.map((item, index) => (
-                      <TouchableOpacity style={styles.restImageDiv} key={index} onPress={() => navigate.navigate('auth/resturantPage', {productID: item._id})}>
+                        <TouchableOpacity style={styles.restImageDiv} key={index} onPress={() => handleProductPress(item._id)}>
                         <Image source={require('../../assets/images/rest1.png')}
                           resizeMode='cover'
                           style={styles.restImage}
@@ -273,6 +274,7 @@ const index = ({ productID }) => {
 
               </View>
             </View>
+
           }
       </ScrollView>
 
