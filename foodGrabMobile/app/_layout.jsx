@@ -9,6 +9,7 @@ import { ErrorBoundary } from 'expo-router';
 import { ActivityIndicator } from 'react-native';
 import { View } from './components/Themed';
 import { Text } from "react-native"
+import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -70,6 +71,7 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
+      <StatusBar style='dark' />
       <RootLayoutNav />
     </AuthProvider>
   )
